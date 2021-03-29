@@ -22,6 +22,12 @@ $(function(){
         L.marker(e.latlng, {icon: userPosIcon}).addTo(map);
 
         L.circle(e.latlng, {radius: err, color: '#3c6942'}).addTo(map);
+
+        // Loop again for user position
+
+        setTimeout(function() {
+            map.locate({setView: false});
+        }, 1000);
     }
     
     map.on('locationfound', onLocationFound);
