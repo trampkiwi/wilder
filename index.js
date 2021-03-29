@@ -19,7 +19,7 @@ $(function(){
     function onLocationFound(e) {
         var err = e.accuracy;
 
-        L.marker(e.latlng).addTo(map);
+        L.marker(e.latlng, {icon: userPosIcon}).addTo(map);
 
         L.circle(e.latlng, err).addTo(map);
     }
