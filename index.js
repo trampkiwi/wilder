@@ -1,11 +1,11 @@
 $(function(){
     // Initialise map
 
-    var map = L.map('mapdiv').fitWorld();
+    var map = L.map('mapdiv').setView([51.505, -0.09], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
-        username: 'starwatcherkiwi',
+        //username: 'starwatcherkiwi',
         //id: 'ckmv4oewx06sw17p7ezxkfw5h',
         id: 'mapbox/streets-v11',
         tileSize: 512,
