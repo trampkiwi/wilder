@@ -21,7 +21,7 @@ $(function(){
 
         L.marker(e.latlng, {icon: userPosIcon}).addTo(map);
 
-        L.circle(e.latlng, err).addTo(map);
+        L.circle(e.latlng, {radius: err, color: '#3c6942'}).addTo(map);
     }
     
     map.on('locationfound', onLocationFound);
