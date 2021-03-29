@@ -14,7 +14,7 @@ $(function(){
 
     // Locate user
 
-    map.locate({setView: true, maxZoom: 16});
+    /*map.locate({setView: true, maxZoom: 16});
     
     function onLocationFound(e) {
         var err = e.accuracy;
@@ -30,5 +30,5 @@ $(function(){
         alert(e.message);
     }
     
-    map.on('locationerror', onLocationError);
+    map.on('locationerror', onLocationError);*/
 });
