@@ -25,4 +25,10 @@ $(function(){
     }
     
     map.on('locationfound', onLocationFound);
+
+    function onLocationError(e) {
+        alert(e.message);
+    }
+    
+    map.on('locationerror', onLocationError);
 });
