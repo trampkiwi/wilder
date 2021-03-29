@@ -1,4 +1,4 @@
 var userPosIcon = L.icon({
     iconUrl: 'icon.png',
-    iconSize: [30, 30]
+    iconSize: [20, 20]
 })
