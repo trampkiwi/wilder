@@ -23,10 +23,9 @@ $(function(){
     map.locate({setView: true, maxZoom: 16});
     
     function onLocationFound(e) {
-        var err = e.accuracy;
-
         locationMarker.setLatLng(e.latlng);
         locationCircle.setLatLng(e.latlng);
+        locationCircle.setRadius(e.accuracy);
 
         // Loop again for user position
 
