@@ -14,8 +14,8 @@ $(function(){
 
     // Locate user
 
-    var locationMarker = L.marker(e.latlng, {icon: userPosIcon});
-    var locationCircle = L.circle(e.latlng, {radius: err, color: '#3c6942'});
+    var locationMarker = L.marker([0, 0], {icon: userPosIcon});
+    var locationCircle = L.circle([0, 0], {radius: err, color: '#3c6942'});
 
     locationMarker.addTo(map);
     locationCircle.addTo(map);
