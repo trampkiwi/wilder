@@ -60,7 +60,7 @@ $(function(){
     // -------------- Menu button functionality ---------------
 
     $('#menubutton').on('click', function() {
-        $('.navBar').css('height', '50vh');
+        $('.navBar').css('height', '50%');
     });
 
     $('#closemenu').on('click', function() {
