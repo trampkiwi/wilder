@@ -6,7 +6,7 @@ $(function(){
     }).setView([51.505, -0.09], 13);
 
     L.control.zoom({
-        position: 'topright'
+        position: 'bottomright'
     }).addTo(map);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{username}/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
