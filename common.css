@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'handwriting_j';
+    src: url('Assets/handwriting_j-regular-webfont.woff2') format('woff2'),
+         url('Assets/handwriting_j-regular-webfont.woff') format('woff'),
+         url('Assets/Handwriting_j-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
