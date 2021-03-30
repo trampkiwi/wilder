@@ -27,12 +27,12 @@
                 position: relative;
             }
 
-            #menulink {
+            #menubutton {
                 position: absolute;
                 left: 20px;
                 top: 20px;
                 font-size: 1.5em;
-                z-index: 314159;
+                z-index: 1;
                 color: rgb(72, 84, 72);
                 font-weight: bold;
             }
@@ -42,12 +42,46 @@
                 width: 100%;
                 z-index: 0;
             }
+
+            .sideNav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 2;
+                top: 0;
+                left: 0;
+                overflow-x: hidden;
+                transition: 0.5s;
+            }
         </style>
     </head>
     <body>
+        <div class="sideNav">
+            Heylo
+        </div>
         <div id="main">
             <div id="mapdiv"></div>
-            <a id="menulink" href="#">Menu</a>
+            <a id="menubutton" href="#">Menu</a>
         </div>
+
+        <!-- Google Firebase config -->
+
+        <!--<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+
+        <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBDEc8_oSw_vVlZt1MkQd7j_zPbZv370zQ",
+            authDomain: "wilder-b612a.firebaseapp.com",
+            projectId: "wilder-b612a",
+            storageBucket: "wilder-b612a.appspot.com",
+            messagingSenderId: "821439630051",
+            appId: "1:821439630051:web:6492a72602a5dbfa7c93d6",
+            measurementId: "G-3YKPD99FCT"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        </script>-->
     </body>
 </html>
