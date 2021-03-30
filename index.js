@@ -14,25 +14,19 @@ $(function(){
 
     // Locate user
 
-    map.locate({setView: true, maxZoom: 16});
+    var locationMarker = L.marker(e.latlng, {icon: userPosIcon});
+    var locationCircle = L.circle(e.latlng, {radius: err, color: '#3c6942'});
 
-    var locationMarker;
-    var locationCircle;
+    locationMarker.addTo(map);
+    locationCircle.addTo(map);
+
+    map.locate({setView: true, maxZoom: 16});
     
     function onLocationFound(e) {
         var err = e.accuracy;
 
-        if(locationMarker && locationCircle) {
-            locationMarker.remove();
-            locationCircle.remove();
-        }
-        
-        locationMarker = L.marker(e.latlng, {icon: userPosIcon}),
-        locationCircle = L.circle(e.latlng, {radius: err, color: '#3c6942'});
-
-        locationMarker.addTo(map);
-
-        locationCircle.addTo(map);
+        locationMarker.setLatLng(e.latlng);
+        locationCircle.setLatLng(e.latlng);
 
         // Loop again for user position
 
