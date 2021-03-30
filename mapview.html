@@ -30,7 +30,17 @@
             #menubutton {
                 position: absolute;
                 left: 20px;
-                top: 20px;
+                bottom: 20px;
+                font-size: 1.5em;
+                z-index: 1;
+                color: rgb(72, 84, 72);
+                font-weight: bold;
+            }
+
+            #closemenu {
+                position: absolute;
+                left: 20px;
+                bottom: 20px;
                 font-size: 1.5em;
                 z-index: 1;
                 color: rgb(72, 84, 72);
@@ -43,22 +53,23 @@
                 z-index: 0;
             }
 
-            .sideNav {
+            .navBar {
                 height: 0;
                 width: 100%;
                 position: fixed;
                 z-index: 2;
                 bottom: 0;
                 left: 0;
-                overflow-x: hidden;
+                overflow-y: hidden;
                 transition: 0.5s;
-                background-color: black;
+                background-color: rgb(253, 252, 233);
             }
         </style>
     </head>
     <body>
-        <div class="sideNav">
+        <div class="navBar">
             Heylo
+            <a id="closemenu" href="#">Close menu</a>
         </div>
         <div id="main">
             <div id="mapdiv"></div>

@@ -1,6 +1,6 @@
 $(function(){
     // -------------- Initialise map ----------------
-
+    
     var map = L.map('mapdiv', {
         zoomControl: false
     }).setView([51.505, -0.09], 13);
@@ -21,7 +21,7 @@ $(function(){
 
     // ----------------- Locate user -------------------
 
-    var locationMarker = L.marker([0, 0], {icon: userPosIcon});
+    /*var locationMarker = L.marker([0, 0], {icon: userPosIcon});
     var locationCircle = L.circle([0, 0], {radius: 1, color: '#3c6942'});
 
     locationMarker.addTo(map);
@@ -55,11 +55,15 @@ $(function(){
         }, 1000);
     }
     
-    map.on('locationerror', onLocationError);
+    map.on('locationerror', onLocationError);*/
 
     // -------------- Menu button functionality ---------------
 
     $('#menubutton').on('click', function() {
-        $('.sideNav').css('height', '50vh');
+        $('.navBar').css('height', '50vh');
+    });
+
+    $('#closemenu').on('click', function() {
+        $('.navBar').css('height', '0');
     });
 });
