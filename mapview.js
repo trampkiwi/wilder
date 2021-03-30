@@ -60,6 +60,6 @@ $(function(){
     // -------------- Menu button functionality ---------------
 
     $('#menubutton').on('click', function() {
-        $('.sideNav').css('width', '250px');
+        $('.sideNav').css('height', '50vh');
     });
 });
