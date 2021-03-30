@@ -56,4 +56,8 @@ $(function(){
     }
     
     map.on('locationerror', onLocationError);
+
+    // -------------- Menu button functionality ---------------
+
+    
 });

@@ -23,7 +23,11 @@
                 font-family: Helvetica, sans-serif;
             }
 
-            .menulink {
+            #main {
+                position: relative;
+            }
+
+            #menulink {
                 position: absolute;
                 left: 20px;
                 top: 20px;
@@ -41,7 +45,9 @@
         </style>
     </head>
     <body>
-        <div id="mapdiv"></div>
-        <a class="menulink" href="#">Menu</a>
+        <div id="main">
+            <div id="mapdiv"></div>
+            <a id="menulink" href="#">Menu</a>
+        </div>
     </body>
 </html>
