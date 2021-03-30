@@ -1,5 +1,5 @@
 $(function(){
-    // Initialise map
+    // -------------- Initialise map ----------------
 
     var map = L.map('mapdiv').setView([51.505, -0.09], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{username}/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -12,7 +12,7 @@ $(function(){
         accessToken: 'pk.eyJ1Ijoic3RhcndhdGNoZXJraXdpIiwiYSI6ImNrbXY0ODVkMjAxa2Myb205ZTFxeDVweHEifQ.fwIZz2Ljwvpv3dGH7Elp9g'
     }).addTo(map);
 
-    // Locate user
+    // ----------------- Locate user -------------------
 
     var locationMarker = L.marker([0, 0], {icon: userPosIcon});
     var locationCircle = L.circle([0, 0], {radius: 1, color: '#3c6942'});
@@ -37,7 +37,15 @@ $(function(){
     map.on('locationfound', onLocationFound);
 
     function onLocationError(e) {
-        alert(e.message);
+        // Log error
+
+        console.error(e.message);
+
+        // Attempt locating user again
+
+        setTimeout(function() {
+            map.locate({setView: false});
+        }, 1000);
     }
     
     map.on('locationerror', onLocationError);
