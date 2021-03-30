@@ -1,8 +1,12 @@
 @font-face {
-    font-family: 'handwriting_j';
-    src: url('Assets/handwriting_j-regular-webfont.woff2') format('woff2'),
-         url('Assets/handwriting_j-regular-webfont.woff') format('woff'),
-         url('Assets/Handwriting_j-Regular.ttf') format('truetype');
+    font-family: 'Handwriting_j';
+    src: url('Assets/Handwriting_j\ font/Handwriting_j-Regular.eot');
+    src: url('Assets/Handwriting_j\ font/Handwriting_j-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Assets/Handwriting_j\ font/Handwriting_j-Regular.woff2') format('woff2'),
+        url('Assets/Handwriting_j\ font/Handwriting_j-Regular.woff') format('woff'),
+        url('Assets/Handwriting_j\ font/Handwriting_j-Regular.ttf') format('truetype'),
+        url('Assets/Handwriting_j\ font/Handwriting_j-Regular.svg#Handwriting_j-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
