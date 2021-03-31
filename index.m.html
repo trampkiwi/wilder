@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Wilder</title>
+        <meta charset="UTF-8">
         <link rel="shortcut icon" href="Assets/site front ico.ico">
         <link rel="apple-touch-icon" sizes="512x512" href="Assets/site front.png">
         <link rel="icon" sizes="512x512" href="Assets/site front.png">
@@ -8,6 +9,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
         <script src="index.m.js"></script>
         <link rel="stylesheet" href="common.css">
+        
         <style>
             html { margin: 0; padding: 0; }
             body {
@@ -30,13 +32,20 @@
                 margin-bottom: 0;
             }
 
+            .subtitle {
+                font-family: 'Handwriting_j', Helvetica, sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 3.2em;
+            }
+
             .frontimg {
                 width: 80vw;
                 border: none;
                 border-bottom: 5px dotted #6a6b2f;
             }
 
-            .subtitle {
+            .description {
                 font-size: 1.7em;
                 font-family: 'Handwriting_j', Helvetica, sans-serif;
             }
@@ -44,16 +53,33 @@
             .navlink {
                 font-size: 1.5em;
             }
+
+            hr {
+                border: none;
+                border-bottom: 5px dotted #6a6b2f;
+            }
+
+            .content {
+                text-align: left;
+            }
         </style>
     </head>
     <body>
         <h1 class="title">Wilder</h1>
         <img class="frontimg" src="Assets/site front.png">
-        <p class="subtitle">
-            Watching, understanding and connecting with the wilderness that we live in
+        <p class="description">
+            Watching, understanding and connecting with the wilderness that we are a part of
         </p>
 
-        <a href="signin.html" class="navlink" style="margin-right: 30px;">sign in</a>
-        <a href="mapview.html" class="navlink">explore</a>
+        <div style="margin-bottom: 1.7em">
+            <a href="signin.m.html" class="navlink" style="margin-right: 30px;">sign in</a>
+            <a href="mapview.m.html" class="navlink">explore</a>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h1 class="subtitle">What is Wilder?</h1>
+        </div>
     </body>
 </html>
