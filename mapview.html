@@ -27,17 +27,7 @@
                 position: relative;
             }
 
-            #menubutton {
-                position: absolute;
-                left: 20px;
-                bottom: 20px;
-                font-size: 1.5em;
-                z-index: 1;
-                color: rgb(72, 84, 72);
-                font-weight: bold;
-            }
-
-            #closemenu {
+            #menubutton, #closemenu {
                 position: absolute;
                 left: 20px;
                 bottom: 20px;
@@ -78,7 +68,8 @@
 
         <!-- Google Firebase config -->
 
-        <!--<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 
         <script>
@@ -94,6 +85,6 @@
 
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
-        </script>-->
+        </script>
     </body>
 </html>

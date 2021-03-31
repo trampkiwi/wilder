@@ -57,10 +57,12 @@ $(function(){
     
     map.on('locationerror', onLocationError);*/
 
+    // -------------- Load 
+
     // -------------- Menu button functionality ---------------
 
     $('#menubutton').on('click', function() {
-        $('.navBar').css('height', '50%');
+        $('.navBar').css('height', '70%');
     });
 
     $('#closemenu').on('click', function() {
