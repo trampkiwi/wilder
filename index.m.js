@@ -61,9 +61,11 @@ firebase.auth().onAuthStateChanged(function(user) {
         $('.description').html('Welcome back' + (user.displayName ? ' '+user.displayName : '') + '!');
 
         $('#signout').css('display', 'inline');
+        $('#signin').css('display', 'none');
     } else { // If there isn't a signed in user
         $('.description').html('Watching, understanding and connecting with the wilderness that we are a part of');
         
         $('#signin').css('display', 'inline');
+        $('#signout').css('display', 'none');
     }
 });
