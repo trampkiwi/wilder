@@ -8,7 +8,7 @@ modalView.openModal = function(mv, veil, height) {
 
     var body = $('body');
 
-    body.css('top', '0');
+    body.css('top', '-' + body.scrollTop().toString() + 'px');
     body.css('left', '0');
     body.css('position', 'fixed');
 };
