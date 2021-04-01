@@ -8,7 +8,7 @@ modalView.openModal = function(mv, veil, height) {
 
     var body = $('body');
 
-    body.css('top', '-' + body.scrollTop().toString() + 'px');
+    body.css('top', (-1 * body.scrollTop()).toString() + 'px');
     body.css('left', '0');
     body.css('position', 'fixed');
 };
@@ -21,5 +21,10 @@ modalView.closeModal = function(mv, veil) {
 
     mv.css('height', '0');
 
-    $('body').css('position', 'static');
+    var body = $('body');
+
+    body.css('position', 'static');
+    var topStr = body.css('top');
+    var scrollPos = -1 * parseInt(topStr.substring(0, topStr.length - 2));
+    body.scrollTop(scrollPos);
 }
