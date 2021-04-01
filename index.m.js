@@ -12,6 +12,43 @@ if(!window.mobileCheck()) {
     window.location.replace("index.html")
 }
 
-$(function() {
-    
+// Sign out handler
+
+function onSignOut() {
+    // Get user instance
+
+    var user = firebase.auth().currentUser;
+
+    // Check if user is anonymous and display warning if so
+
+    if(user.providerData.length == 0) { // If user is anonymous, show warning prompt
+        var veil = $('.veil');
+        var navBar = $('.navBar');
+
+        veil.css('display', 'block');
+        veil.css('background-color', 'rgba(0, 0, 0, 0.5)');
+        navBar.css('height', '70%');
+    }
+
+    firebase.auth().signOut().then(() => {
+        window.location.replace('https://www.wilderecologies.tk/');
+    })
+}
+
+function onSignOutConfirm() { // If an anonymous user confirms signing out after being shown the warning
+
+}
+
+// Recognise if logged in
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) { // If a user is signed in
+        $('.description').html('Welcome back' + (user.displayName ? ' '+user.displayName : '') + '!');
+
+        $('#signout').css('display', 'inline');
+    } else { // If there isn't a signed in user
+        $('.description').html('Watching, understanding and connecting with the wilderness that we are a part of');
+        
+        $('#signin').css('display', 'inline');
+    }
 });

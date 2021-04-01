@@ -101,38 +101,7 @@
 
             firebase.initializeApp(firebaseConfig);
             firebase.analytics();
-
-            // Sign out handler
-
-            function onSignOut() {
-                // Get user instance
-
-                var user = firebase.auth().currentUser;
-
-                // Check if user is anonymous and display warning if so
-
-                if(user.providerData.length == 0) { // If user is anonymous
-
-                }
-
-                firebase.auth().signOut().then(() => {
-                    window.location.replace('https://www.wilderecologies.tk/');
-                })
-            }
-
-            // Recognise if logged in
-        
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) { // If a user is signed in
-                    $('.description').html('Welcome back' + (user.displayName ? ' '+user.displayName : '') + '!');
-
-                    $('#signout').css('display', 'inline');
-                } else { // If there isn't a signed in user
-                    $('.description').html('Watching, understanding and connecting with the wilderness that we are a part of');
-                    
-                    $('#signin').css('display', 'inline');
-                }
-            });
+            
         </script>
     </head>
     <body>
@@ -155,7 +124,14 @@
             </div>
         </div>
 
+        <div class="veil">
+        </div>
+
         <div class="navBar">
+            If you sign out as an anonymous user, you will permanently lose access to personal features.<br>
+            You can <a href="#">update your account</a> into an email authorised account or a google account so that you can log out safely and access personal services across different devices.<br>
+            Are you sure you wish to continue signing out?<br>
+
         </div>
     </body>
 </html>
