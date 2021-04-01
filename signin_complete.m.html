@@ -49,9 +49,9 @@
         <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
         <script type="text/javascript">
-            $(function() {
-                var user = firebase.auth().currentUser;
+            var user = firebase.auth().currentUser;
 
+            $(function() {
                 if (user) {
                     // User is signed in.
                     $('#result_dummy').html(user.displayName);
@@ -59,9 +59,17 @@
                     // No user is signed in.
                 }
             });
+
+            function logout() {
+                firebase.auth().signOut().then(() => {
+                    window.location.replace('https://www.wilderecologies.tk/');
+                })
+            }
+
         </script>
     </head>
     <body>
         <div id="result_dummy"></div>
+        <a href="#" onclick="logout()">Log out</a>
     </body>
 </html>
