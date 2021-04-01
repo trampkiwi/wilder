@@ -11,6 +11,13 @@
     font-display: swap;
 }
 
+html { margin: 0; padding: 0; }
+
+body {
+    background-color: rgb(253, 252, 233);
+    font-family: Helvetica, sans-serif;
+}
+
 a {
     color: rgb(72, 84, 72);
 }

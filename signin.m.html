@@ -17,9 +17,7 @@
             body {
                 margin: 3em 10vw 3em 10vw;
                 padding: 0;
-                background-color: rgb(253, 252, 233);
                 text-align: center;
-                font-family: Helvetica, sans-serif;
             }
 
             h1 {
@@ -45,14 +43,10 @@
                 left: 0;
                 overflow-y: hidden;
                 transition: 0.5s;
-                background-color: white;
+                background-color: rgb(253, 252, 233);
                 border-top: 1px solid #6a6b2f;
-            }
-
-            .navBarContainer {
-                position: relative;
-                width: 100%;
-                height: 100%;
+                padding: 0;
+                margin: 0;
             }
 
             #closeNavbar {
@@ -60,6 +54,19 @@
                 right: 20px;
                 top: 20px;
                 font-size: 1.5em;
+            }
+
+            .veil {
+                transition-property: background-color;
+                transition: 0.5s;
+                background-color: rgba(0, 0, 0, 0);
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                display: none;
             }
         </style>
 
@@ -117,16 +124,20 @@
             <div id="firebaseui-auth-container"></div>
             <a href="#" class="link" id="openNavbar">about signing in as a guest</a>
             <hr>
-            <a href="/" class="link">back to front page</a>
+            <a href="index.m.html" class="link">back to front page</a>
             <hr>
-            <a href="/mapview.m.html" class="link">continue to explore<br>without signing in</a>
+            <a href="mapview.m.html" class="link">continue to explore<br>without signing in</a>
+        </div>
+
+        <div class="veil">
         </div>
 
         <div class="navBar">
-            <div class="navBarContainer">
-                Heylo
-                <a id="closeNavbar" href="#">X</a>
+            <div style="background-color: #ccdba2; display: inline-block; width: 100%;">
+                <h1 style="font-size: 1.5em; margin: 20px 0 20px 0;">Signing in as a guest</h1>
             </div>
+            <hr style="margin: 0;">
+            <a id="closeNavbar" href="#">X</a>
         </div>
     </body>
 </html>

@@ -9,15 +9,14 @@
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
         <script src="index.m.js"></script>
         <link rel="stylesheet" href="common.css">
+
+        <!-- Style -->
         
         <style>
-            html { margin: 0; padding: 0; }
             body {
                 margin: 3em 10vw 3em 10vw;
                 padding: 0;
-                background-color: rgb(253, 252, 233);
                 text-align: center;
-                font-family: Helvetica, sans-serif;
             }
 
             .title {
@@ -54,6 +53,51 @@
                 text-align: left;
             }
         </style>
+
+        <!-- Firebase config -->
+
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+
+        <script>
+            var firebaseConfig = {
+                apiKey: "AIzaSyBDEc8_oSw_vVlZt1MkQd7j_zPbZv370zQ",
+                authDomain: "wilder-b612a.firebaseapp.com",
+                projectId: "wilder-b612a",
+                storageBucket: "wilder-b612a.appspot.com",
+                messagingSenderId: "821439630051",
+                appId: "1:821439630051:web:6492a72602a5dbfa7c93d6",
+                measurementId: "G-3YKPD99FCT"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+
+            // Sign out handler
+
+            function onSignOut() {
+                firebase.auth().signOut().then(() => {
+                    window.location.replace('https://www.wilderecologies.tk/');
+                })
+            }
+
+            // Recognise if logged in
+        
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // If user is signed in
+                    
+                    $('.description').html('Welcome back' + (user.displayName ? ' '+user.displayName : '') + '!');
+                    console.log(user.providerData);
+
+                    $('#signin').css('display', 'none');
+                    $('#signout').css('display', 'inline');
+                }
+            });
+
+            // Attach
+        </script>
     </head>
     <body>
         <h1 class="title">Wilder</h1>
@@ -63,7 +107,8 @@
         </p>
 
         <div style="margin-bottom: 1.7em">
-            <a href="signin.m.html" class="navlink" style="margin-right: 30px;">sign in</a>
+            <a href="signin.m.html" class="navlink" style="margin-right: 30px;" id="signin">sign in</a>
+            <a href="#" class="navlink" style="margin-right: 30px; display: none;" id="signout" onclick="onSignOut()">sign out</a>
             <a href="mapview.m.html" class="navlink">explore</a>
         </div>
 
