@@ -22,17 +22,7 @@ function signOut() {
     // Check if user is anonymous and display warning if so
 
     if(user.providerData.length == 0) { // If user is anonymous, show warning prompt
-        var veil = $('.veil');
-        var navBar = $('.navBar');
-        var body = $('body');
-
-        veil.css('display', 'block');
-        veil.css('background-color', 'rgba(0, 0, 0, 0.5)');
-        navBar.css('height', '60%');
-
-        body.css('position', 'fixed');
-        body.css('left', '0');
-        body.css('top', '0');
+        modalView.openModal($('.navBar'), $('.veil'), '60%');
     } else {
         firebase.auth().signOut().then(() => {
             window.location.replace('/');
@@ -49,17 +39,7 @@ function signOutConfirm() { // If an anonymous user confirms signing out after b
 // Closing warning prompt
 
 function closeNavbar() {
-    var veil = $('.veil');
-    var navBar = $('.navBar');
-    var body = $('body');
-
-    veil.css('background-color', 'rgba(0, 0, 0, 0)');
-    veil.on('transitionend', () => {
-        veil.css('display', 'none');
-    })
-    navBar.css('height', '0');
-
-    body.css('position', 'static');
+    modalView.closeModal($('.navBar'), $('.veil'));
 }
 
 // Recognise if logged in
