@@ -47,7 +47,7 @@ hr {
     bottom: 0;
     left: 0;
     overflow-y: hidden;
-    /*transition: 0.5s;*/
+    transition: 0.5s;
     background-color: var(--background-col);
     border-top: 1px solid var(--hr-and-line-col);
     padding: 0;
