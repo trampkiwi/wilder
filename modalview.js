@@ -23,7 +23,7 @@ modalView.closeModal = function(mv, veil) {
 
     var body = $('body');
 
-    body.css('position', 'static');
+    body.css('position', '');
     var topStr = body.css('top');
     var scrollPos = -1 * parseInt(topStr.substring(0, topStr.length - 2));
     console.log(scrollPos);
