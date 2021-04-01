@@ -66,6 +66,7 @@ hr {
 }
 
 .navBar .content {
+    font-size: 1.1em;
     text-align: left;
     margin-left: var(--body-left-margin);
     margin-right: var(--body-right-margin);
