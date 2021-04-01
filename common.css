@@ -70,6 +70,7 @@ hr {
     text-align: left;
     margin-left: var(--body-left-margin);
     margin-right: var(--body-right-margin);
+    overflow-y: scroll;
 }
 
 #closeNavbar {
