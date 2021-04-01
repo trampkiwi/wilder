@@ -37,6 +37,19 @@ function onSignOutConfirm() { // If an anonymous user confirms signing out after
 
 }
 
+// Closing warning prompt
+
+function closeNavbar() {
+    var veil = $('.veil');
+    var navBar = $('.navBar');
+
+    veil.css('background-color', 'rgba(0, 0, 0, 0)');
+    veil.on('transitionend', () => {
+        veil.css('display', 'none');
+    })
+    navBar.css('height', '0');
+}
+
 // Recognise if logged in
 
 firebase.auth().onAuthStateChanged(function(user) {
