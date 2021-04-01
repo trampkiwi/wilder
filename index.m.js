@@ -28,11 +28,9 @@ function onSignOut() {
         veil.css('display', 'block');
         veil.css('background-color', 'rgba(0, 0, 0, 0.5)');
         navBar.css('height', '70%');
+    } else {
+        firebase.auth().signOut();
     }
-
-    firebase.auth().signOut().then(() => {
-        window.location.replace('https://www.wilderecologies.tk/');
-    })
 }
 
 function onSignOutConfirm() { // If an anonymous user confirms signing out after being shown the warning
