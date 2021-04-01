@@ -52,6 +52,9 @@ hr {
     border-top: 1px solid var(--hr-and-line-col);
     padding: 0;
     margin: 0;
+
+    display: flex;
+    flex-flow: column;
 }
 
 .navBar .header {
@@ -70,6 +73,8 @@ hr {
     margin-left: var(--body-left-margin);
     margin-right: var(--body-right-margin);
     overflow-y: scroll;
+
+    flex-grow: 1;
 }
 
 #closeNavbar {
