@@ -17,8 +17,8 @@
     --hr-and-line-col: #6a6b2f;
     --link-col: rgb(72, 84, 72);
 
-    --body-top-margin: 3em;
-    --body-bottom-margin: 3em;
+    --body-top-margin: 30px;
+    --body-bottom-margin: 30px;
     --body-left-margin: 30px;
     --body-right-margin: 30px;
 }
