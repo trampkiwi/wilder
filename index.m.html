@@ -52,6 +52,34 @@
             .content {
                 text-align: left;
             }
+
+            .navBar {
+                height: 0;
+                width: 100%;
+                position: fixed;
+                z-index: 2;
+                bottom: 0;
+                left: 0;
+                overflow-y: hidden;
+                transition: 0.5s;
+                background-color: rgb(253, 252, 233);
+                border-top: 1px solid #6a6b2f;
+                padding: 0;
+                margin: 0;
+            }
+
+            .veil {
+                transition-property: background-color;
+                transition: 0.5s;
+                background-color: rgba(0, 0, 0, 0);
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                display: none;
+            }
         </style>
 
         <!-- Firebase config -->
@@ -77,6 +105,16 @@
             // Sign out handler
 
             function onSignOut() {
+                // Get user instance
+
+                var user = firebase.auth().currentUser;
+
+                // Check if user is anonymous and display warning if so
+
+                if(user.providerData.length == 0) { // If user is anonymous
+
+                }
+
                 firebase.auth().signOut().then(() => {
                     window.location.replace('https://www.wilderecologies.tk/');
                 })
@@ -85,37 +123,39 @@
             // Recognise if logged in
         
             firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    // If user is signed in
-                    
+                if (user) { // If a user is signed in
                     $('.description').html('Welcome back' + (user.displayName ? ' '+user.displayName : '') + '!');
-                    console.log(user.providerData);
 
-                    $('#signin').css('display', 'none');
                     $('#signout').css('display', 'inline');
+                } else { // If there isn't a signed in user
+                    $('.description').html('Watching, understanding and connecting with the wilderness that we are a part of');
+                    
+                    $('#signin').css('display', 'inline');
                 }
             });
-
-            // Attach
         </script>
     </head>
     <body>
-        <h1 class="title">Wilder</h1>
-        <img class="frontimg" src="Assets/site front.png">
-        <p class="description">
-            Watching, understanding and connecting with the wilderness that we are a part of
-        </p>
+        <div>
+            <h1 class="title">Wilder</h1>
+            <img class="frontimg" src="Assets/site front.png">
+            <p class="description">
+            </p>
 
-        <div style="margin-bottom: 1.7em">
-            <a href="signin.m.html" class="navlink" style="margin-right: 30px;" id="signin">sign in</a>
-            <a href="#" class="navlink" style="margin-right: 30px; display: none;" id="signout" onclick="onSignOut()">sign out</a>
-            <a href="mapview.m.html" class="navlink">explore</a>
+            <div style="margin-bottom: 1.7em">
+                <a href="signin.m.html" class="navlink" style="margin-right: 30px;" style="display: none;" id="signin">sign in</a>
+                <a href="#" class="navlink" style="margin-right: 30px; display: none;" id="signout" onclick="onSignOut()">sign out</a>
+                <a href="mapview.m.html" class="navlink">explore</a>
+            </div>
+
+            <hr>
+
+            <div class="content">
+                <h1 class="subtitle">What is Wilder?</h1>
+            </div>
         </div>
 
-        <hr>
-
-        <div class="content">
-            <h1 class="subtitle">What is Wilder?</h1>
+        <div class="navBar">
         </div>
     </body>
 </html>
