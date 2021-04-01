@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="common.css">
+        <script src="signin.m.js"></script>
 
         <!-- Style -->
         
@@ -23,13 +24,42 @@
 
             h1 {
                 font-weight: normal;
-                margin-bottom: 2em;
             }
 
-            .back {
+            #firebaseui-auth-container {
+                margin: 2.3em 0 0 0;
+            }
+
+            .link {
                 display: block;
                 margin: 1em 0 1em 0;
                 font-size: 1.2em;
+            }
+
+            .navBar {
+                height: 0;
+                width: 100%;
+                position: fixed;
+                z-index: 2;
+                bottom: 0;
+                left: 0;
+                overflow-y: hidden;
+                transition: 0.5s;
+                background-color: white;
+                border-top: 1px solid #6a6b2f;
+            }
+
+            .navBarContainer {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+
+            #closeNavbar {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                font-size: 1.5em;
             }
         </style>
 
@@ -81,11 +111,22 @@
         </script>
     </head>
     <body>
-        <h1>Sign up / Sign in</h1>
-        <div id="firebaseui-auth-container"></div>
-        <hr>
-        <a href="/" class="back">back to front page</a>
-        <hr>
-        <a href="/mapview.m.html" class="back">continue to explore<br>without signing in</a>
+        <div class="content">
+            <h1>Sign up / Sign in</h1>
+            <hr>
+            <div id="firebaseui-auth-container"></div>
+            <a href="#" class="link" id="openNavbar">about signing in as a guest</a>
+            <hr>
+            <a href="/" class="link">back to front page</a>
+            <hr>
+            <a href="/mapview.m.html" class="link">continue to explore<br>without signing in</a>
+        </div>
+
+        <div class="navBar">
+            <div class="navBarContainer">
+                Heylo
+                <a id="closeNavbar" href="#">X</a>
+            </div>
+        </div>
     </body>
 </html>
