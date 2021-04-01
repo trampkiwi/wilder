@@ -6,6 +6,8 @@ modalView.openModal = function(mv, veil, height) {
 
     mv.css('height', height);
 
+    var body = $('body');
+
     body.css('top', '0');
     body.css('left', '0');
     body.css('position', 'fixed');
@@ -19,5 +21,5 @@ modalView.closeModal = function(mv, veil) {
 
     mv.css('height', '0');
 
-    body.css('position', 'static');
+    $('body').css('position', 'static');
 }
