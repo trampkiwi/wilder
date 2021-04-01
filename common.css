@@ -10,3 +10,12 @@
     font-style: normal;
     font-display: swap;
 }
+
+a {
+    color: rgb(72, 84, 72);
+}
+
+hr {
+    border: none;
+    border-bottom: 5px dotted #6a6b2f;
+}
