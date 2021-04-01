@@ -14,7 +14,7 @@ if(!window.mobileCheck()) {
 
 // Sign out handler
 
-function onSignOut() {
+function signOut() {
     // Get user instance
 
     var user = firebase.auth().currentUser;
@@ -35,7 +35,7 @@ function onSignOut() {
     }
 }
 
-function onSignOutConfirm() { // If an anonymous user confirms signing out after being shown the warning
+function signOutConfirm() { // If an anonymous user confirms signing out after being shown the warning
     firebase.auth().signOut().then(() => {
         window.location.replace('/');
     });

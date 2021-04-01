@@ -89,7 +89,7 @@
 
             <div style="margin-bottom: 1.7em">
                 <a href="signin.m.html" class="navlink" style="margin-right: 30px;" style="display: none;" id="signin">sign in</a>
-                <a href="#" class="navlink" style="margin-right: 30px; display: none;" id="signout" onclick="onSignOut()">sign out</a>
+                <a href="#" class="navlink" style="margin-right: 30px; display: none;" id="signout" onclick="signOut()">sign out</a>
                 <a href="mapview.m.html" class="navlink">explore</a>
             </div>
 
@@ -113,6 +113,7 @@
                     If you sign out as an anonymous user, you will permanently lose access to personal features.<br>
                 You can <a href="#">update your account</a> into an email authorised account or a google account so that you can log out safely and access personal services across different devices.<br>
                 Are you sure you wish to continue signing out?<br>
+                <a href="#" onclick="signOutConfirm()">Sign out</a>
                 </p>
             </div>
 
