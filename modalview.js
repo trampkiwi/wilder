@@ -30,6 +30,6 @@ modalView.closeModal = function(mv, veil) {
 
     setTimeout(() => {
         body.scrollTop(scrollPos);
-    }, 20);
+    }, 2);
     
 }
