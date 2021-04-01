@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Wilder</title>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="Assets/site front ico.ico">
+        <link rel="apple-touch-icon" sizes="512x512" href="Assets/site front.png">
+        <link rel="icon" sizes="512x512" href="Assets/site front.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="index.m.js"></script>
+        <link rel="stylesheet" href="common.css">
+
+        <!-- Style -->
+        
+        <style>
+            html { margin: 0; padding: 0; }
+            body {
+                margin: 3em 10vw 3em 10vw;
+                padding: 0;
+                background-color: rgb(253, 252, 233);
+                text-align: center;
+                font-family: Helvetica, sans-serif;
+            }
+        </style>
+
+        <!-- Google Firebase config -->
+
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+
+        <script>
+            var firebaseConfig = {
+                apiKey: "AIzaSyBDEc8_oSw_vVlZt1MkQd7j_zPbZv370zQ",
+                authDomain: "wilder-b612a.firebaseapp.com",
+                projectId: "wilder-b612a",
+                storageBucket: "wilder-b612a.appspot.com",
+                messagingSenderId: "821439630051",
+                appId: "1:821439630051:web:6492a72602a5dbfa7c93d6",
+                measurementId: "G-3YKPD99FCT"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+        </script>
+
+        <!-- Firebase Authentication config -->
+
+        <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+
+        <script type="text/javascript">
+            $(function() {
+                var user = firebase.auth().currentUser;
+
+                if (user) {
+                    // User is signed in.
+                    $('#result_dummy').html(user.displayName);
+                } else {
+                    // No user is signed in.
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="result_dummy"></div>
+    </body>
+</html>
