@@ -13,7 +13,7 @@
         
         <style>
             body {
-                margin: 3em 30px 3em 30px;
+                margin: var(--body-top-margin) var(--body-right-margin) var(--body-bottom-margin) var(--body-left-margin);
                 padding: 0;
                 text-align: center;
             }
@@ -50,34 +50,6 @@
 
             .content {
                 text-align: left;
-            }
-
-            .navBar {
-                height: 0;
-                width: 100%;
-                position: fixed;
-                z-index: 2;
-                bottom: 0;
-                left: 0;
-                overflow-y: hidden;
-                transition: 0.5s;
-                background-color: rgb(253, 252, 233);
-                border-top: 1px solid #6a6b2f;
-                padding: 0;
-                margin: 0;
-            }
-
-            .veil {
-                transition-property: background-color;
-                transition: 0.5s;
-                background-color: rgba(0, 0, 0, 0);
-                width: 100%;
-                height: 100%;
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 1;
-                display: none;
             }
         </style>
 
@@ -135,11 +107,13 @@
                 <h1>Signing out as a guest</h1>
             </div>
             <hr style="margin: 0;">
-            <p style="margin: 1em 30px 1em 30px; text-align: left;">
-                If you sign out as an anonymous user, you will permanently lose access to personal features.<br>
-            You can <a href="#">update your account</a> into an email authorised account or a google account so that you can log out safely and access personal services across different devices.<br>
-            Are you sure you wish to continue signing out?<br>
-            </p>
+            <div class="content">
+                <p>
+                    If you sign out as an anonymous user, you will permanently lose access to personal features.<br>
+                You can <a href="#">update your account</a> into an email authorised account or a google account so that you can log out safely and access personal services across different devices.<br>
+                Are you sure you wish to continue signing out?<br>
+                </p>
+            </div>
 
             <a id="closeNavbar" href="#" onclick="closeNavbar()">X</a>
         </div>

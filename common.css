@@ -11,20 +11,32 @@
     font-display: swap;
 }
 
+:root {
+    --background-col: rgb(253, 252, 233);
+    --menu-header-col: #ccdba2;
+    --hr-and-line-col: #6a6b2f;
+    --link-col: rgb(72, 84, 72);
+
+    --body-top-margin: 3em;
+    --body-bottom-margin: 3em;
+    --body-left-margin: 30px;
+    --body-right-margin: 30px;
+}
+
 html { margin: 0; padding: 0; }
 
 body {
-    background-color: rgb(253, 252, 233);
+    background-color: var(--background-col);
     font-family: Helvetica, sans-serif;
 }
 
 a {
-    color: rgb(72, 84, 72);
+    color: var(--link-col);
 }
 
 hr {
     border: none;
-    border-bottom: 5px dotted #6a6b2f;
+    border-bottom: 5px dotted var(--hr-and-line-col);
 }
 
 .navBar {
@@ -36,14 +48,14 @@ hr {
     left: 0;
     overflow-y: hidden;
     transition: 0.5s;
-    background-color: rgb(253, 252, 233);
-    border-top: 1px solid #6a6b2f;
+    background-color: var(--background-col);
+    border-top: 1px solid var(--hr-and-line-col);
     padding: 0;
     margin: 0;
 }
 
 .navBar .header {
-    background-color: #ccdba2;
+    background-color: var(--menu-header-col);
     display: inline-block;
     width: 100%;
 }
@@ -51,6 +63,12 @@ hr {
 .navBar .header h1 {
     font-size: 1.5em;
     margin: 20px 0 20px 0;
+}
+
+.navBar .content {
+    text-align: left;
+    margin-left: var(--body-left-margin);
+    margin-right: var(--body-right-margin);
 }
 
 #closeNavbar {

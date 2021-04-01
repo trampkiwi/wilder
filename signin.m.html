@@ -15,7 +15,7 @@
         <style>
             html { margin: 0; padding: 0; }
             body {
-                margin: 3em 30px 3em 30px;
+                margin: var(--body-top-margin) var(--body-right-margin) var(--body-bottom-margin) var(--body-left-margin);
                 padding: 0;
                 text-align: center;
             }
@@ -102,6 +102,9 @@
                 <h1>Signing in as a guest</h1>
             </div>
             <hr style="margin: 0;">
+            <div class="content">
+                Foo bar
+            </div>
             <a id="closeNavbar" href="#" onclick="closeNavbar()">X</a>
         </div>
     </body>
