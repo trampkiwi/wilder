@@ -49,11 +49,13 @@
         <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
         <script type="text/javascript">
-        
+
             $(function() {
+                var user = firebase.auth().currentUser;
+
                 if (user) {
                     // User is signed in.
-                    $('#result_dummy').html(firebaase.auth().currentUser.displayName);
+                    $('#result_dummy').html(user.displayName);
                 } else {
                     // No user is signed in.
                 }
