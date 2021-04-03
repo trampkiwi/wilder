@@ -29,7 +29,7 @@ function calcMarkerDiam(val, currentZoomLevel, options) {
             fullVisAtMin: 100,
             maxZoomLevel: 14,
             fullVisAtMax: 1,
-            maxDiam: 40,
+            maxDiam: 30,
             zoomEaseIn: 2
         };
     }
