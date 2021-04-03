@@ -50,10 +50,12 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         $('#signout').css('display', 'inline');
         $('#signin').css('display', 'none');
+        $('#exploreButton').css('display', 'inline');
     } else { // If there isn't a signed in user
         $('.description').html('Watching, understanding and connecting with the wilderness that we are a part of');
         
         $('#signin').css('display', 'inline');
         $('#signout').css('display', 'none');
+        $('#exploreButton').css('display', 'none');
     }
 });
