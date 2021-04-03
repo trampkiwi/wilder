@@ -1,19 +1,21 @@
 var modalView = {};
 
-modalView.openModal = function(mv, veil, height) {
+modalView.openModal = function(mv, veil, height, doFreezeBody) { // Default behaviour is to freeze the body.
     veil.css('display', 'block');
     veil.css('background-color', 'rgba(0, 0, 0, 0.5)');
 
     mv.css('height', height);
 
-    var body = $('body');
+    if(doFreezeBody || doFreezeBody === undefined) {
+        var body = $('body');
 
-    body.css('top', (-1 * body.scrollTop()).toString() + 'px');
-    body.css('left', '0');
-    body.css('position', 'fixed');
+        body.css('top', (-1 * body.scrollTop()).toString() + 'px');
+        body.css('left', '0');
+        body.css('position', 'fixed');
+    }
 };
 
-modalView.closeModal = function(mv, veil) {
+modalView.closeModal = function(mv, veil, wasBodyFrozen) {
     veil.css('background-color', 'rgba(0, 0, 0, 0)');
     veil.on('transitionend', () => {
         veil.css('display', 'none');
@@ -21,15 +23,16 @@ modalView.closeModal = function(mv, veil) {
 
     mv.css('height', '0');
 
-    var body = $('body');
+    if(wasBodyFrozen || doFreezeBody === undefined) { // Default behaviour is to unfreeze the body.
 
-    body.css('position', 'static');
-    var topStr = body.css('top');
-    var scrollPos = -1 * parseInt(topStr.substring(0, topStr.length - 2));
-    console.log(scrollPos);
+        var body = $('body');
 
-    setTimeout(() => {
-        body.scrollTop(scrollPos);
-    }, 2);
-    
+        body.css('position', 'static');
+        var topStr = body.css('top');
+        var scrollPos = -1 * parseInt(topStr.substring(0, topStr.length - 2));
+
+        setTimeout(() => {
+            body.scrollTop(scrollPos);
+        }, 2);
+    }
 }
