@@ -49,7 +49,7 @@
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
                         // User is signed in.
-                        $('user_name').html(user.displayName);
+                        $('#user_name').html(user.displayName);
                     } else {
                         window.location.replace('https://www.wilderecologies.tk/');
                     }
