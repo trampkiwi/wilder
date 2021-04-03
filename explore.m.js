@@ -1,3 +1,5 @@
+// ----------- Lerp util --------
+
 function lerp(xa, ya, xb, yb, x) { // Linearly interpolating function (xa < xb)
     return ya + (yb-ya)/(xb-xa)*(x-xa);
 }
@@ -65,12 +67,6 @@ $(function(){
         accessToken: 'pk.eyJ1Ijoic3RhcndhdGNoZXJraXdpIiwiYSI6ImNrbXY0ODVkMjAxa2Myb205ZTFxeDVweHEifQ.fwIZz2Ljwvpv3dGH7Elp9g'
     }).addTo(map);
 
-    // -------------- Test code to see zoom level -----------------
-
-    /*map.on('zoomend', () => {
-        console.log(map.getZoom());
-    });*/
-
     // -------------- Marker Diam Calc test markers ---------------
 
     var markers = [];
@@ -112,13 +108,18 @@ $(function(){
 
     // ----------------- Locate user -------------------
 
-    /*var locationMarker = L.marker([0, 0], {icon: userPosIcon});
+    var userPosIcon = L.icon({
+        iconUrl: 'Assets/posMarker.png',
+        iconSize: [20, 20]
+    });
+
+    var locationMarker = L.marker([0, 0], {icon: userPosIcon});
     var locationCircle = L.circle([0, 0], {radius: 1, color: '#3c6942'});
 
     locationMarker.addTo(map);
-    locationCircle.addTo(map);*/
+    locationCircle.addTo(map);
 
-    /*map.locate({setView: true, maxZoom: 16});
+    map.locate({setView: true, maxZoom: 16});
     
     function onLocationFound(e) {
         locationMarker.setLatLng(e.latlng);
@@ -146,7 +147,7 @@ $(function(){
         }, 1000);
     }
     
-    map.on('locationerror', onLocationError);*/
+    map.on('locationerror', onLocationError);
 
     // -------------- Load 
 

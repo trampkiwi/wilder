@@ -19,8 +19,7 @@
         crossorigin=""></script>
 
         <!-- JS import -->
-
-        <script src="icon.js"></script>
+        
         <script src="explore.m.js"></script>
 
         <!-- Defining style -->
@@ -69,6 +68,7 @@
 
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 
         <script>
@@ -85,6 +85,10 @@
             firebase.initializeApp(firebaseConfig);
             firebase.analytics();
         </script>
+
+        <!-- Check if user is valid and redirect to invalid user page if not -->
+        
+        <script src="validate_user.js"></script>
     </head>
     <body>
         <div class="navBar">
