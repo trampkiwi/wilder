@@ -27,6 +27,7 @@
 
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
 
         <script>
@@ -47,26 +48,40 @@
 
             $(() => {
                 firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        // User is signed in.
+                    if (user) { // User is signed in
+                        // Check if user is approved: The following query only returns a valid read if the user is approved.
+
+                        var db = firebase.firestore();
+                        var validationRef = db.collection('user_validation_dummy').doc('dummy'); // Only logged in and 'allowed' users can access this document.
+
+                        validationRef.get().then(() => { // User is approved
+                            // Do nothing
+                        }).catch((error) => {
+                            if(error.code == 'permission-denied') { // Current login is invalid.
+                                window.location.replace('/invalid_user.m.html'); // Redirect to invalid user page.
+                            }
+                        });
+
                         $('#user_name').html(user.displayName);
-                    } else {
-                        window.location.replace('https://www.wilderecologies.tk/');
+                    } else { // User is not signed in: erroneous state
+                        window.location.replace('/');
                     }
                 });
             });
 
             function logout() {
                 firebase.auth().signOut().then(() => {
-                    window.location.replace('https://www.wilderecologies.tk/');
+                    window.location.replace('/');
                 })
             }
 
         </script>
     </head>
     <body>
-        <h1 class="subtitle_hw">Welcome <span id="user_name"></span>!</h1>
+        <h1>Sign in complete</h1>
+        <hr>
         <div id="result_dummy"></div>
+        
         <a href="/">Return to front page</a>
     </body>
 </html>
