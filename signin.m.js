@@ -1,3 +1,6 @@
+// Below code is unused currently
+
+/*
 function openNavbar() {
     modalView.openModal($('.navBar'), $('.veil'), '70%');
 }
@@ -5,3 +8,4 @@ function openNavbar() {
 function closeNavbar () {
     modalView.closeModal($('.navBar'), $('.veil'));
 }
+*/
