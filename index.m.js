@@ -26,13 +26,13 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) { // If a user is signed in
         $('.description').html('Welcome back' + (user.displayName ? ' '+user.displayName : '') + '!');
 
-        $('#signout').css('display', 'inline');
+        $('#signout').css('display', 'inline-block');
         $('#signin').css('display', 'none');
-        $('#exploreButton').css('display', 'inline');
+        $('#exploreButton').css('display', 'inline-block');
     } else { // If there isn't a signed in user
         $('.description').html('Watching, understanding and connecting with the wilderness that we are a part of');
         
-        $('#signin').css('display', 'inline');
+        $('#signin').css('display', 'inline-block');
         $('#signout').css('display', 'none');
         $('#exploreButton').css('display', 'none');
     }
