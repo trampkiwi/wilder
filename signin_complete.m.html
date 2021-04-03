@@ -45,13 +45,15 @@
 
             // Check if user is logged in
 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    // User is signed in.
-                    alert(user.displayName);
-                } else {
-                    // No user is signed in.
-                }
+            $(() => {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        // User is signed in.
+                        $('user_name').html(user.displayName);
+                    } else {
+                        window.location.replace('https://www.wilderecologies.tk/');
+                    }
+                });
             });
 
             function logout() {
@@ -63,7 +65,8 @@
         </script>
     </head>
     <body>
+        <h1 class="subtitle_hw">Welcome <span id="user_name"></span>!</h1>
         <div id="result_dummy"></div>
-        <a href="#" onclick="logout()">Log out</a>
+        <a href="#" onclick="/">Return to front page</a>
     </body>
 </html>
