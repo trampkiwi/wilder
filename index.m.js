@@ -15,31 +15,9 @@ if(!window.mobileCheck()) {
 // Sign out handler
 
 function signOut() {
-    // Get user instance
-
-    var user = firebase.auth().currentUser;
-
-    // Check if user is anonymous and display warning if so
-
-    if(user.providerData.length == 0) { // If user is anonymous, show warning prompt
-        modalView.openModal($('.navBar'), $('.veil'), '60%');
-    } else {
-        firebase.auth().signOut().then(() => {
-            window.location.replace('/');
-        });
-    }
-}
-
-function signOutConfirm() { // If an anonymous user confirms signing out after being shown the warning
     firebase.auth().signOut().then(() => {
         window.location.replace('/');
     });
-}
-
-// Closing warning prompt
-
-function closeNavbar() {
-    modalView.closeModal($('.navBar'), $('.veil'));
 }
 
 // Recognise if logged in
@@ -57,5 +35,13 @@ firebase.auth().onAuthStateChanged(function(user) {
         $('#signin').css('display', 'inline');
         $('#signout').css('display', 'none');
         $('#exploreButton').css('display', 'none');
+    }
+});
+
+$(() => {
+    // Display 'Paul' with a 20% chance
+    
+    if(Math.random() < 0.2) {
+        $('#p_hello').css('display', 'inline-block');
     }
 });
