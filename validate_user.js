@@ -1,9 +1,3 @@
-firebase.auth.onAuthStateChanged(function(user) {
-    if(!user) {
-        window.location.replace('/');
-    }
-})
-
 // Import after firebase-database.js
 
 var db = firebase.database();
