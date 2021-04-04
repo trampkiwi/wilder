@@ -27,7 +27,7 @@ function lerpCapped(xa, ya, xb, yb, x) { // 'Capped' lerp function (xa < xb)
 function calcMarkerDiam(val, currentZoomLevel, options) {
     if(options === undefined) {
         options = {
-            minZoomLevel: 9,
+            minZoomLevel: 10,
             fullVisAtMin: 100,
             maxZoomLevel: 14,
             fullVisAtMax: 1,
@@ -37,14 +37,69 @@ function calcMarkerDiam(val, currentZoomLevel, options) {
     }
 
     var fullVisZoom = lerpCapped(options.fullVisAtMax, options.maxZoomLevel, options.fullVisAtMin, options.minZoomLevel, val);
-    console.log([fullVisZoom-options.zoomEaseIn, 0, fullVisZoom, options.maxDiam, currentZoomLevel]);
 
-    var diam = lerpCapped(fullVisZoom-options.zoomEaseIn, 0, fullVisZoom, options.maxDiam, currentZoomLevel)
-    console.log(diam);
+    var diam = lerpCapped(fullVisZoom-options.zoomEaseIn, 0, fullVisZoom, options.maxDiam, currentZoomLevel);
 
     return diam; // The magic of a double lerp...
 }
 
+/*
+    To save the number of read requests that are made, server side read request will only be fired
+    if the new map region contains areas that have not been cached before.
+    This requires there to be an array that stores the regions that have been cached.
+    The code will use exploreCache.rects to store this.
+    To ensure good performance, exploreCache.rects will be capped in terms of length.
+    Each rect will be in the following form:
+
+    [
+        minLat, minLong, maxLat, maxLong,
+        lastUpdated
+    ]
+
+    Of which lastUpdated is the UNIX timestamp when the rect was last updated by data from the server.
+
+    This does mean that, if the user navigates the world using the map a lot,
+    there will still be a considerable number of requests that are made.
+
+    For small scale data, loading the whole dataset and then doing client side work to render everything properly
+    requires less read requests in total.
+    However, for large scale data, it might not be practical to load the whole data everytime the user loads the page,
+    so this method is more suitable.
+    This method is adopted to ensure future scalability.
+    
+    The mapview display will only use data from cache.
+
+    When the page is reloaded, the page will attempt to retrieve the exploreCache stored in the sessionStorage.
+    If it is able to retrieve the object, it will check through all the rects
+*/
+
+// ----------- Attempt to enable offline persistence for caching ----------
+
+/*var firestoreDB = firebase.firestore();
+
+// ----------- Declare/retreive storage array ----------
+
+var exploreCache = {};
+
+var importedExploreCache = window.sessionStorage.getItem('exploreCache'); // Attempt to retrieve exploreCache
+
+if(importedExploreCache != null) { // If previous cache exists
+    exploreCache = JSON.parse(importedExploreCache);
+}
+
+// ---------- sessionStorage storing logic ----------
+
+window.addEventListener('pagehide', (event) => { // When the user's session is suspended
+    window.sessionStorage.setItem('exploreCache', JSON.stringify(exploreCache)); // Attempt to store data in sessionStorage
+});
+
+// ----------- 'Smart' data retriever ------------
+
+function 
+
+
+
+*/
 
 $(function(){
     // -------------- Initialise map ----------------
@@ -60,6 +115,7 @@ $(function(){
     L.tileLayer('https://api.mapbox.com/styles/v1/{username}/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
+        minZoom: 1,
         username: 'starwatcherkiwi',
         id: 'ckmv4oewx06sw17p7ezxkfw5h',
         tileSize: 512,
@@ -138,13 +194,14 @@ $(function(){
     function onLocationError(e) {
         // Log error
 
-        console.error(e.message);
+        console.error(e);
 
         // Attempt locating user again
 
-        setTimeout(function() {
+        // TODO: show location error prompt
+        /*setTimeout(function() {
             map.locate({setView: false});
-        }, 1000);
+        }, 1000);*/
     }
     
     map.on('locationerror', onLocationError);
