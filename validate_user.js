@@ -1,3 +1,13 @@
+/*
+firebase.auth.onAuthStateChanged(function(user) {
+    if(user == null) {
+        window.location.replace('/');
+    }
+})
+*/
+
+// Import after firebase-database.js
+
 var db = firebase.database();
 
 // Only logged in and 'allowed' users can access the dummy document.

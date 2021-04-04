@@ -152,7 +152,7 @@ $(function(){
 
     map.on('zoomend', () => {
         var currentZoom = map.getZoom();
-        console.log(currentZoom);
+        //console.log(currentZoom);
         
         markers.forEach((marker) => {
             var diam = calcMarkerDiam(marker.prop.weight, currentZoom);
