@@ -19,7 +19,7 @@
             }
 
             h1 {
-                font-weight: normal;
+                /*font-weight: normal;*/
             }
         </style>
 
@@ -29,53 +29,37 @@
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
-        <script src="firebase-init.js"></script>
+        <script src="/func_js/firebase-init.js"></script>
 
-        <script>
-            // Check if user is logged in
+        <!-- Page specific script -->
 
-            $(() => {
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) { // User is signed in
-                        // Check if user is approved: The following query only returns a valid read if the user is approved.
-
-                        var db = firebase.database();
-
-                        // Only logged in and 'allowed' users can access the dummy document.
-
-                        db.ref('/user_validation_dummy').once('value').then(() => { // User is approved
-
-                            console.log('safe!');
-                            // Show page content
-                            $('#content').css('display', 'block');
-                        }).catch((err) => { // If error occurs
-                            if(err.code == 'PERMISSION_DENIED') { // Current login is invalid.
-                                window.location.replace('/invalid_user.m.html'); // Redirect to invalid user page.
-                            }
-                        });
-
-                        $('#user_name').html(user.displayName);
-                    } else { // User is not signed in: erroneous state
-                        window.location.replace('/');
-                    }
-                });
-            });
-
-            function logout() {
-                firebase.auth().signOut().then(() => {
-                    window.location.replace('/');
-                })
-            }
-
-        </script>
+        <script src="/view_js/signin_complete.m.js"></script>
     </head>
     <body>
-        <div id="content" style="display: none;"> <!-- not visible until user has been validated -->
+        <!-- TODO: set display: none; for production -->
+        <div id="content"> <!-- not visible until user has been validated -->
             <h1>Sign in complete</h1>
             <hr>
-            <div id="result_dummy"></div>
-            
-            <a href="/">Return to front page</a>
+            <p>
+                <img src="/Assets/signin_complete.png" style="width: 70vw;">
+            </p>
+
+            <p>
+                <span class="highlight_p">Welcome <span style="font-family: 'Handwriting_j', Helvetica, sans-serif; font-size: 1.3em;">(back)</span> to Wilder!</span>
+            </p>
+
+            <p>
+                Begin navigating by following the links below.
+            </p>
+
+            <p>
+                If you are a new user, you can begin the tutorial by following the <a href="#" class="to_explore_tutorial" style="font-weight: bold;">tutorial</a> link.
+            </p>
+            <hr>
+            <a class="navlink" href="/explore.m.html">Go to Explore</a><br>
+            <a class="navlink to_explore_tutorial" href="#">Begin tutorial</a><br>
+            <a class="navlink" href="#" id="logout">Log out</a><br>
+            <a class="navlink" href="/index.m.html">Return to front page</a>
         </div>
     </body>
 </html>

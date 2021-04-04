@@ -45,15 +45,15 @@
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
-        <script src="firebase-init.js"></script>
+        <script src="/func_js/firebase-init.js"></script>
 
         <!-- Modal view JS code -->
 
-        <script src="modalview.js"></script>
+        <script src="/func_js/modalview.js"></script>
         
         <!-- Page specific JS code -->
 
-        <script src="index.m.js"></script>
+        <script src="/view_js/index.m.js"></script>
     </head>
     <body>
         <div>
@@ -66,12 +66,12 @@
             <img id="p_hello" src="Assets/p_hello.png" style="display: none; height: 4rem; margin: 0.5rem 0 -0.5rem 0;">
 
             <div style="position: relative;">
-                <a href="signin.m.html" class="navlink" style="display: none;" id="signin">sign in</a>
-                <a href="#" class="navlink" style="margin-right: 30px; display: none;" id="signout" onclick="signOut()">sign out</a>
-                <a href="explore.m.html" style="display: none;" class="navlink" id="exploreButton">explore</a>
+                <a href="signin.m.html" class="navlink" style="display: none;" id="signin">Sign in</a>
+                <a href="#" class="navlink" style="margin-right: 30px; display: none;" id="signout" onclick="signOut()">Sign out</a>
+                <a href="explore.m.html" style="display: none;" class="navlink" id="exploreButton">Explore</a>
             </div>
 
-            <hr>
+            <hr style="margin-top: 1.2rem;">
 
             <div style="border: 2px solid red; padding: 20px;">
                 <strong>* Wilder is currently only open to a small group of testing users who are helping to improve the service. *</strong><br>
@@ -92,33 +92,6 @@
             <div class="content">
                 <h1 class="subtitle_hw">What is Wilder?</h1>
             </div>
-        </div>
-
-        <div class="veil" onclick="closeNavbar()">
-        </div>
-
-        <div class="navBar">
-            <div class="header">
-                <h1>Signing out as a guest</h1>
-            </div>
-            <hr style="margin: 0;">
-            <div class="content">
-                <p>
-                    If you sign out as an anonymous user, <strong>you will permanently lose access to personal features</strong>.
-                </p>
-                <p>
-                    You can <a href="#">update your account</a> into an email authorised account or a google account
-                    so that you can log out safely and access personal services across different devices.
-                </p>
-                <p>
-                    <strong>Are you sure you wish to continue signing out?</strong>
-                </p>
-                <p>
-                    <a class="navLink" href="#" onclick="signOutConfirm()" style="font-weight: bold; color: #bf2900">Sign out</a>
-                </p>
-            </div>
-
-            <a id="closeNavbar" href="#" onclick="closeNavbar()">X</a>
         </div>
     </body>
 </html>

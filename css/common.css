@@ -16,6 +16,7 @@
     --menu-header-col: #ccdba2;
     --hr-and-line-col: #6a6b2f;
     --link-col: rgb(72, 84, 72);
+    --highlight-col: #354228;
 
     --body-top-margin: 30px;
     --body-bottom-margin: 30px;
@@ -42,7 +43,7 @@ hr {
 .navlink {
     display: inline-block;
     font-size: 1.4rem;
-    margin: 1.2rem 0 1.2rem 0;
+    margin: 1.2rem 0 0 0;
 }
 
 .navBar {
@@ -115,4 +116,10 @@ hr {
     font-weight: normal;
     font-style: normal;
     font-size: 3.2em;
+}
+
+.highlight_p {
+    color: var(--highlight-col);
+    font-weight: bold;
+    font-size: 1.2em;
 }
