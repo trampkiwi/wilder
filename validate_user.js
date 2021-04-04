@@ -1,10 +1,8 @@
-/*
 firebase.auth.onAuthStateChanged(function(user) {
-    if(user == null) {
+    if(!user) {
         window.location.replace('/');
     }
 })
-*/
 
 // Import after firebase-database.js
 
