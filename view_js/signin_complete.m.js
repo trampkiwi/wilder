@@ -1,7 +1,13 @@
-// Check if user is logged in
-// Temporarily disabled auth check functionality for testing
-
+// TODO:
 /*
+    - detect new user by checking if user item exists in database.
+        - if new user, initiate user profile drawing routine.
+            - then show full signin complete page with tutorials option visible
+        - if not new user, show full signin complete page with tutorials option invisible
+*/
+
+// Check user status
+
 $(() => {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) { // User is signed in
@@ -9,25 +15,32 @@ $(() => {
 
             var db = firebase.database();
 
-            // Only logged in and 'allowed' users can access the dummy document.
+            var uid = firebase.auth().currentUser.uid;
 
-            db.ref('/user_validation_dummy').once('value').then(() => { // User is approved
+            db.ref('/users/' + uid).once('value').then((snapShot) => { // User is approved
 
-                console.log('safe!');
+                console.log(snapShot);
                 // Show page content
                 $('#content').css('display', 'block');
             }).catch((err) => { // If error occurs
+                console.log(err.code);
                 if(err.code == 'PERMISSION_DENIED') { // Current login is invalid.
                     window.location.replace('/invalid_user.m.html'); // Redirect to invalid user page.
                 }
             });
-
-            $('#user_name').html(user.displayName);
         } else { // User is not signed in: erroneous state
             window.location.replace('/');
         }
     });
-});*/
+});
+
+// Tutorial routine init callback: the state of being in a tutorial is stored in the sessionStorage item 'isInTutorial',
+// which can either be 'true' or 'false'. (string)
+
+function beginTutorialAndGoToExplore() {
+    window.sessionStorage.setItem
+}
+
 
 function logout() {
     firebase.auth().signOut().then(() => {
