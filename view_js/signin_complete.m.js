@@ -22,7 +22,7 @@ $(() => {
                 var dat = snapShot.val();
                 console.log(dat);
                 
-                if(typeof dat === 'undefined') { // User has not registered before.
+                if(dat == null) { // User has not registered before.
 
                     // Display 'last step' in registration
                     $('#registerLastStep').css('display', 'block');
