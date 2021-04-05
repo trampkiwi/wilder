@@ -104,6 +104,12 @@ hr {
     display: none;
 }
 
+.handwriting {
+    font-family: 'Handwriting_j', Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
 .title_hw {
     font-family: 'Handwriting_j', Helvetica, sans-serif;
     font-weight: normal;

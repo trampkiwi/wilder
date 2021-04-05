@@ -54,6 +54,6 @@ function beginTutorialAndGoToExplore() {
 
 function signout() {
     firebase.auth().signOut().then(() => {
-        window.location.replace('/');
-    })
+        window.location.replace('/index.m.html');
+    });
 }
