@@ -11,6 +11,19 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Handwriting_j';
+    src: url('/Assets/Handwriting_j\ font/Handwriting_j-Bold.eot');
+    src: url('/Assets/Handwriting_j\ font/Handwriting_j-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/Assets/Handwriting_j\ font/Handwriting_j-Bold.woff2') format('woff2'),
+        url('/Assets/Handwriting_j\ font/Handwriting_j-Bold.woff') format('woff'),
+        url('/Assets/Handwriting_j\ font/Handwriting_j-Bold.ttf') format('truetype'),
+        url('/Assets/Handwriting_j\ font/Handwriting_j-Bold.svg#Handwriting_j-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --background-col: rgb(253, 252, 233);
     --menu-header-col: #ccdba2;
@@ -108,7 +121,7 @@ hr {
     font-family: 'Handwriting_j', Helvetica, sans-serif;
     font-weight: normal;
     font-style: normal;
-    font-size: 1.45em;
+    font-size: 1.4em;
     position: relative;
     top: 0.12em;
 }
