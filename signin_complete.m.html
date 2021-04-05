@@ -21,6 +21,10 @@
             h1 {
                 /*font-weight: normal;*/
             }
+
+            .tutorial_content {
+                display: none;
+            }
         </style>
 
         <!-- Google Firebase config -->
@@ -36,8 +40,7 @@
         <script src="/view_js/signin_complete.m.js"></script>
     </head>
     <body>
-        <!-- TODO: set display: none; for production -->
-        <div id="content"> <!-- not visible until user has been validated -->
+        <div id="registerCompleteContent" style="display: none;"> <!-- not visible until user has been validated -->
             <h1>Sign in complete</h1>
             <hr>
             <p>
@@ -52,14 +55,19 @@
                 Begin navigating by following the links below.
             </p>
 
-            <p>
+            <p class="tutorial_content"> <!-- only made visible for new users -->
                 If you are a new user, you can begin the tutorial by following the <a href="#" class="to_explore_tutorial" style="font-weight: bold;">tutorial</a> link.
             </p>
             <hr>
             <a class="navlink" href="/explore.m.html">Go to Explore</a><br>
-            <a class="navlink to_explore_tutorial" href="#">Begin tutorial</a><br>
+            <a class="navlink to_explore_tutorial tutorial_content" href="#">Begin tutorial</a><br> <!-- only made visible for new users -->
             <a class="navlink" href="#" id="logout">Log out</a><br>
             <a class="navlink" href="/index.m.html">Return to front page</a>
+        </div>
+        
+        <!-- Last step in registration. Only shown to users newly registering. -->
+        <div id="registerLastStep">
+            <h1>This is the last step!</h1>
         </div>
     </body>
 </html>

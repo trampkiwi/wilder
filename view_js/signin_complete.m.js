@@ -17,15 +17,22 @@ $(() => {
 
             var uid = firebase.auth().currentUser.uid;
 
-            db.ref('/observations').once('value').then((snapShot) => { // User is approved
+            db.ref('/users/' + uid).once('value').then((snapShot) => { // User is approved.
 
-                console.log(snapShot.val());
-                console.log(snapShot.val().observations['"1"']);
-                // Show page content
-                $('#content').css('display', 'block');
+                var dat = snapShot.val();
+                
+                if(typeof dat === 'undefined') { // User has not registered before.
+
+                    // Display 'last step' in registration
+                    $('#registerLastStep').css('display', 'block');
+
+                } else { // User has registered before.
+                    // Show page content bar tutorial options
+                    $('#registerCompleteContent').css('display', 'block');
+                }
+                
             }).catch((err) => { // If error occurs
-                console.log(err.code);
-                if(err.code == 'PERMISSION_DENIED') { // Current login is invalid.
+                if(err.code == 'PERMISSION_DENIED') { // User is not approved.
                     window.location.replace('/invalid_user.m.html'); // Redirect to invalid user page.
                 }
             });
