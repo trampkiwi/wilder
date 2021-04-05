@@ -20,7 +20,7 @@ $(() => {
             db.ref('/users/' + uid).once('value').then((snapShot) => { // User is approved
 
                 console.log(snapShot.val());
-                console.log(snapShot.val().observations['1']);
+                console.log(snapShot.val().observations['"1"']);
                 // Show page content
                 $('#content').css('display', 'block');
             }).catch((err) => { // If error occurs
