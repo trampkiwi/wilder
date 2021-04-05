@@ -6,7 +6,11 @@
         <link rel="apple-touch-icon" sizes="512x512" href="Assets/site front.png">
         <link rel="icon" sizes="512x512" href="Assets/site front.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- JQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <!-- HSLuv -->
+        <script src="https://cdn.jsdelivr.net/npm/hsluv@0.1.0/hsluv.min.js"></script>
+        <!-- common stylesheet -->
         <link rel="stylesheet" href="/css/common.css">
 
         <!-- Style -->
@@ -67,11 +71,21 @@
         
         <!-- Last step in registration. Only shown to users newly registering. -->
         <div id="registerLastStep" style="display: block;">
-            <h1>Complete signing up</h1>
+            <h1 style="font-size: 1.6em;">Set up profile picture</h1>
             <hr>
             <p>
-                <span class="highlight_p"><span class="handwriting">Welcome to <strong>Wilder</strong>!</span>Foob</span>
+                <span class="highlight_p" style="font-size: 1.4rem; font-weight: normal;"><span class="handwriting">Welcome to Wilder!</span></span>
             </p>
+            <p>
+                To complete signing up, please set up a profile picture.
+            </p>
+            <hr>
+            <p class="highlight_p">
+                Please choose three colours by clicking on each of the boxes below:
+            </p>
+            <div id="colour_one"></div>
+            <div id="colour_two"></div>
+            <div id="colour_three"></div>
         </div>
     </body>
 </html>
