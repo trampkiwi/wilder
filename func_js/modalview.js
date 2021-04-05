@@ -6,7 +6,7 @@ modalView.openModal = function(mv, veil, height, doFreezeBody) { // Default beha
 
     mv.css('height', height);
 
-    if(doFreezeBody || doFreezeBody === undefined) {
+    if(doFreezeBody || typeof doFreezeBody == 'undefined') {
         var body = $('body');
 
         body.css('top', (-1 * body.scrollTop()).toString() + 'px');
@@ -23,7 +23,7 @@ modalView.closeModal = function(mv, veil, wasBodyFrozen) {
 
     mv.css('height', '0');
 
-    if(wasBodyFrozen || doFreezeBody === undefined) { // Default behaviour is to unfreeze the body.
+    if(wasBodyFrozen || typeof wasBodyFrozen == 'undefined') { // Default behaviour is to unfreeze the body.
 
         var body = $('body');
 
