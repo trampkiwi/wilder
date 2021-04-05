@@ -109,6 +109,8 @@ hr {
     font-weight: normal;
     font-style: normal;
     font-size: 1.3em;
+    position: relative;
+    top: 0.12em;
 }
 
 .title_hw {
