@@ -8,7 +8,6 @@
 
 // Check user status
 
-/*
 $(() => {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) { // User is signed in
@@ -43,7 +42,7 @@ $(() => {
         }
     });
 });
-*/
+
 
 // Tutorial routine init callback: the state of being in a tutorial is stored in the sessionStorage item 'isInTutorial',
 // which can either be 'true' or 'false'. (string)
