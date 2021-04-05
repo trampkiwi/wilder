@@ -35,6 +35,17 @@
                 height: 3rem;
                 border: 2px dotted var(--hr-and-line-col);
             }
+
+            .colour_slider {
+                width: 100%;
+                height: 2rem;
+                border: 1px solid black;
+            }
+
+            #colour_display {
+                width: 100%;
+                flex-grow: 1;
+            }
         </style>
 
         <!-- Google Firebase config -->
@@ -97,6 +108,11 @@
 
         <div class="navBar">
             <a href="#" id="closeNavbar">X</a>
+
+            <div id="colour_display"></div>
+            <div class="colour_slider" id="colour_hue"><div class="slider_handle"></div></div>
+            <div class="colour_slider" id="colour_saturation"><div class="slider_handle"></div></div>
+            <div class="colour_slider" id="colour_lightness"><div class="slider_handle"></div></div>
         </div>
     </body>
 </html>
