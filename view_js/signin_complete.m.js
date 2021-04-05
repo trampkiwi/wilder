@@ -17,7 +17,7 @@ $(() => {
 
             var uid = firebase.auth().currentUser.uid;
 
-            db.ref('/users/' + uid).once('value').then((snapShot) => { // User is approved
+            db.ref('/observations').once('value').then((snapShot) => { // User is approved
 
                 console.log(snapShot.val());
                 console.log(snapShot.val().observations['"1"']);
