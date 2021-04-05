@@ -50,8 +50,9 @@ function beginTutorialAndGoToExplore() {
     window.sessionStorage.setItem
 }
 
+// Signout function. Attached to #signout from the html.
 
-function logout() {
+function signout() {
     firebase.auth().signOut().then(() => {
         window.location.replace('/');
     })
