@@ -20,6 +20,7 @@ $(() => {
             db.ref('/users/' + uid).once('value').then((snapShot) => { // User is approved.
 
                 var dat = snapShot.val();
+                console.log(dat);
                 
                 if(typeof dat === 'undefined') { // User has not registered before.
 
