@@ -66,6 +66,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 $(() => {
 
     // TODO: these should all be in the dat == null clause in the onAuthStateChanged function above.
+    initialiseProfileDrawingView();
 
     initialiseColourPicker();
 });
