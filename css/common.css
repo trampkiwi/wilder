@@ -85,6 +85,7 @@ hr {
 
 .navBar .header {
     background-color: var(--menu-header-col);
+    border-bottom: 5px dotted var(--hr-and-line-col);
     display: inline-block;
     width: 100%;
 }

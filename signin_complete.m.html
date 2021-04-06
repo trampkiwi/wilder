@@ -86,6 +86,12 @@
                 height: 13rem;
                 font-size: 1.2em;
             }
+
+            #drawing_canvas {
+                width: 100vw;
+                height: 100vw;
+                background-color: yellow;
+            }
         </style>
 
         <!-- Google Firebase config -->
@@ -158,6 +164,11 @@
         <div class="veil" id="drawing_view_veil"></div>
         <div class="navBar" id="drawing_view">
             <a href="#" class="closeNavbar">X</a>
+            <div class="header">
+                <h1>Drawing profile picture</h1>
+            </div>
+
+            <canvas id="drawing_canvas"></canvas>
         </div>
 
         <!-- Colour picker modal -->
