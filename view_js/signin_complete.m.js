@@ -80,18 +80,30 @@ function initialiseColourView(barElem) {
         $('#closeNavbar').css('color', 'white');
     }
 
-    $('.colour_slider').on('mousedown', (e) => {
+    $('.colour_slider').on('mousedown', (e, esupp) => {
+        if(typeof e.pageX == 'undefined') { e = esupp; e.target = $(esupp.target).parent().get(); }
 
         var sliderElem = $(e.target);
-
-        $(window).on('mousemove', (ev) => {
+        
+        var moveCallback = (ev) => {
             ev.preventDefault();
             currentRegHSLuv[sliderElem.attr('id')] = ev.pageX / $(window).width() * 100;
             updateColourView(currentRegHSLuv);
-        });
+            
+            if(ev.pageX < 0 || ev.pageX > $(window).width()) { $(window).off('mousemove'); }
+
+            barElem.attr('colour_reg_hsluv', currentRegHSLuv.toString());
+            barElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(currentRegHSLuv)));
+        };
+
+        $(window).on('mousemove', moveCallback);
 
         currentRegHSLuv[sliderElem.attr('id')] = e.pageX / $(window).width() * 100;
         updateColourView(currentRegHSLuv);
+    });
+
+    $('.slider_handle').on('mousedown', (e) => {
+        $(e.target).parent().trigger('mousedown', e);
     })
 
     $(window).on('mouseup', (ev) => {
@@ -161,9 +173,15 @@ $(() => {
 
     $('#closeNavbar').on('click', (e) => {
         modalView.closeModal($('.navBar'), $('.veil'));
+        $(window).off('mousemove');
+        $('.colour_slider').off('mousedown');
+        $('.slider_handle').off('mousedown');
     })
 
     $('.veil').on('click', (e) => {
         modalView.closeModal($('.navBar'), $('.veil'));
+        $(window).off('mousemove');
+        $('.colour_slider').off('mousedown');
+        $('.slider_handle').off('mousedown');
     });
 });
