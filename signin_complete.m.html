@@ -89,14 +89,6 @@
                 Click to begin drawing profile picture
                 <img class="profile_pic_display">
             </div>
-
-            <!--
-            <p class="highlight_p">
-                Choose three colours by clicking on each of the boxes below.
-            </p>
-            <div id="colour_one" class="pick_colour"></div>
-            <div id="colour_two" class="pick_colour"></div>
-            <div id="colour_three" class="pick_colour"></div>-->
         </div>
 
         <!-- Drawing modal -->
@@ -112,13 +104,14 @@
             </div>
 
             <div class="canvas_container">
+                <canvas id="drawing_canvas_history"></canvas>
                 <canvas id="drawing_canvas"></canvas>
             </div>
 
             <div class="lower">
                 <div class="current_colour pick_colour"></div>
-                <div class="sample_colour"></div>
-                <div class="undo"></div>
+                <div class="sample_colour"><img src="/Assets/sample_colour_black.png"></div>
+                <div class="undo"><img src="/Assets/back.png"></div>
             </div>
         </div>
 

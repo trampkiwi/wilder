@@ -87,6 +87,29 @@ function initialiseColourView(barElem) {
     updateColourView(currentRegHSLuv);
 }
 
+function addPastColour(regHsl) {
+    $('.current_colour').after(`
+        <div class="past_colour" colour_reg_hsluv="${regHsl.toString()}"
+            style="background-color: ${hsluv.Hsluv.hsluvToHex(recoverHSLuv(regHsl))}"></div>
+    `);
+
+    var pastColourBoxes = $('.past_colour');
+
+    if(pastColourBoxes.length > 6) {
+        pastColourBoxes[pastColourBoxes.length - 1].remove();
+    }
+
+    pastColourBoxes[0].on('click', (e) => {
+        var cCElem = $('.current_colour');
+        var cRegHsl = cCElem.attr('colour_reg_hsluv');
+        var clickedRegHsl = $(e.target).attr('colour_reg_hsluv');
+
+        cCElem.attr('colour_reg_hsluv', clickedRegHsl);
+        cCElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(clickedRegHsl)));
+        addPastColour(cRegHsl);
+    });
+}
+
 
 function initialiseColourPicker() {
     $('.pick_colour').each((i, e) => {
@@ -111,16 +134,7 @@ function initialiseColourPicker() {
         $('.slider_handle').off('touchstart');
 
         if(prevRegHSLuv[0] != currentRegHSLuv[0] || prevRegHSLuv[1] != currentRegHSLuv[1] || prevRegHSLuv[2] != currentRegHSLuv[2]) { // a bit messy!
-            $('.current_colour').after(`
-                <div class="past_colour" colour_reg_hsluv="${prevRegHSLuv.toString()}"
-                    style="background-color: ${hsluv.Hsluv.hsluvToHex(recoverHSLuv(prevRegHSLuv))}"></div>
-            `);
-
-            var pastColourBoxes = $('.past_colour');
-
-            if(pastColourBoxes.length > 6) {
-                pastColourBoxes[pastColourBoxes.length - 1].remove();
-            }
+            addPastColour(prevRegHSLuv);
         }
     };
 

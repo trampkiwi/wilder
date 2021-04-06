@@ -23,7 +23,13 @@
     display: none;
     width: 100px;
     height: 100px;
-    background-color: yellow;
+    border: 2px dotted var(--hr-and-line-col);
+}
+
+#drawing_canvas_history {
+    display: none;
+    width: 100px;
+    height: 100px;
     border: 2px dotted var(--hr-and-line-col);
 }
 
@@ -51,7 +57,7 @@
 
 #drawing_view .lower .current_colour {
     width: 4rem;
-    /*border: 1px solid black;*/
+    border-right: 2px dotted var(--hr-and-line-col);
 }
 
 #drawing_view .lower .past_colour {
@@ -62,13 +68,18 @@
 
 #drawing_view .lower .sample_colour {
     width: 4rem;
-    border: 1px solid black;
+    border-left: 2px dotted var(--hr-and-line-col);
     margin-left: auto;
 }
 
 #drawing_view .lower .undo {
     width: 4rem;
-    border: 1px solid black;
+    border-left: 2px dotted var(--hr-and-line-col);
+}
+
+#drawing_view .lower .sample_colour img, #drawing_view .lower .undo img {
+    width: 100%;
+    height: 100%;
 }
 
 #drawing_view .canvas_container {
