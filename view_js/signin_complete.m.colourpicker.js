@@ -37,7 +37,7 @@ function updateColourView(currentRegHSL) {
 
         var sliderHandle = sliderElem.find('.slider_handle');
 
-        sliderHandle.css('left', ($(window).width() * currentRegHSL[i] / 100 - 14.5).toString() + 'px');
+        sliderHandle.css('left', ($(window).width() * currentRegHSL[i] / 100 - 13.5).toString() + 'px');
     });
 
     if(currentRegHSL[2] > 50) {
