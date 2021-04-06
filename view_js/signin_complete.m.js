@@ -63,37 +63,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 // Init
 
-function initialiseColourPicker() {
-    $('.pick_colour').each((i, e) => {
-        var elem = $(e);
-
-        var colour_hsluv = [Math.random() * 360, Math.random() * 100, Math.random() * 100];
-
-        elem.css('background-color', hsluv.Hsluv.hsluvToHex(colour_hsluv));
-        elem.attr('colour_reg_hsluv', regulariseHSLuv(colour_hsluv).toString());
-
-        elem.on('click', (ev) => {
-            modalView.openModal($('#colour_picker'), $('.veil'), '70%');
-
-            initialiseColourView($(ev.target));
-        });
-    });
-
-    $('.navBar .closeNavbar').on('click', (e) => {
-        modalView.closeModal($('#colour_picker'), $('.veil'));
-        $(window).off('touchmove');
-        $('.colour_slider').off('touchstart');
-        $('.slider_handle').off('touchstart');
-    })
-
-    $('.veil').on('click', (e) => {
-        modalView.closeModal($('#colour_picker'), $('.veil'));
-        $(window).off('touchmove');
-        $('.colour_slider').off('touchstart');
-        $('.slider_handle').off('touchstart');
-    });
-}
-
 $(() => {
 
     // TODO: these should all be in the dat == null clause in the onAuthStateChanged function above.

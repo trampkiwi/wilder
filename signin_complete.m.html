@@ -55,6 +55,14 @@
                 width: 100%;
                 flex-grow: 1;
             }
+
+            #colour_picker_veil {
+                z-index: 4;
+            }
+
+            #colour_picker {
+                z-index: 5;
+            }
         </style>
 
         <!-- Google Firebase config -->
@@ -114,8 +122,16 @@
             <div id="colour_three" class="pick_colour"></div>
         </div>
 
-        <div class="veil"></div>
+        <!-- Drawing modal -->
+        
+        <div class="veil" id="drawing_view_veil"></div>
+        <div class="navBar" id="drawing_view">
+            <a href="#" class="closeNavbar">X</a>
+        </div>
 
+        <!-- Colour picker modal -->
+
+        <div class="veil" id="colour_picker_veil"></div>
         <div class="navBar" id="colour_picker">
             <a href="#" class="closeNavbar">X</a>
 
@@ -125,8 +141,6 @@
             <div class="colour_slider" id="2"><div class="slider_handle"></div></div>
         </div>
 
-        <div class="navBar" id="drawing_view">
-            <a href="#" class="closeNavbar">X</a>
-        </div>
+        
     </body>
 </html>

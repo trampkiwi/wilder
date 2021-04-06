@@ -84,3 +84,35 @@ function initialiseColourView(barElem) {
 
     updateColourView(currentRegHSLuv);
 }
+
+
+function initialiseColourPicker() {
+    $('.pick_colour').each((i, e) => {
+        var elem = $(e);
+
+        var colour_hsluv = [Math.random() * 360, Math.random() * 100, Math.random() * 100];
+
+        elem.css('background-color', hsluv.Hsluv.hsluvToHex(colour_hsluv));
+        elem.attr('colour_reg_hsluv', regulariseHSLuv(colour_hsluv).toString());
+
+        elem.on('click', (ev) => {
+            modalView.openModal($('#colour_picker'), $('#colour_picker_veil'), '70%');
+
+            initialiseColourView($(ev.target));
+        });
+    });
+
+    $('#colour_picker .closeNavbar').on('click', (e) => {
+        modalView.closeModal($('#colour_picker'), $('#colour_picker_veil'));
+        $(window).off('touchmove');
+        $('.colour_slider').off('touchstart');
+        $('.slider_handle').off('touchstart');
+    })
+
+    $('#colour_picker_veil').on('click', (e) => {
+        modalView.closeModal($('#colour_picker'), $('#colour_picker_veil'));
+        $(window).off('touchmove');
+        $('.colour_slider').off('touchstart');
+        $('.slider_handle').off('touchstart');
+    });
+}
