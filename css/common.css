@@ -37,6 +37,12 @@
     --body-right-margin: 30px;
 }
 
+* { 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
+}
+
 html { margin: 0; padding: 0; }
 
 body {
