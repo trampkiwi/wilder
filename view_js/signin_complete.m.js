@@ -24,6 +24,82 @@ function signout() {
     });
 }
 
+// ------------- Colour picker code ----------------
+
+var isDragging = false;
+
+var currentRegHSLuv = [0, 0, 0]; // Current colour that the colour selector is in, in HSLuv.
+
+function regulariseHSLuv(Hsluv) {
+    var modHsluv = [...Hsluv];
+    modHsluv[0] = modHsluv[0] / 360 * 100;
+    return modHsluv;
+}
+
+function recoverHSLuv(modHsluv) {
+    var Hsluv = [...modHsluv];
+    Hsluv[0] = Hsluv[0] / 100 * 360;
+    return Hsluv;
+}
+
+// Updaate colour slider appearance based on currentHSLuv
+
+function updateColourView(currentRegHSL) {
+    $('#colour_display').css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(currentRegHSL)));
+
+    $('.colour_slider').each((i, slider) => {
+        var sliderElem = $(slider);
+
+        var gradientStr = 'linear-gradient(to right,';
+
+        for(var j = 0; j <= 20; j++) {
+            var gradRegHSL = [...currentRegHSL];
+            gradRegHSL[i] = j / 20 * 100;
+
+            gradientStr = gradientStr + hsluv.Hsluv.hsluvToHex(recoverHSLuv(gradRegHSL)) + ',';
+        }
+
+        gradientStr = gradientStr.substring(0, gradientStr.length - 1) + ')';
+        
+        sliderElem.css('background', gradientStr);
+
+        var sliderHandle = sliderElem.find('.slider_handle');
+
+        sliderHandle.css('left', ($(window).width() * currentRegHSL[i] / 100 - 14.5).toString() + 'px');
+    });
+}
+
+// Initiate colour picker
+
+function initialiseColourView(barElem) {
+    currentRegHSLuv = barElem.attr('colour_reg_hsluv').split(',').map(x => +x);
+
+    if(currentRegHSLuv[2] > 50) {
+        $('#closeNavbar').css('color', 'black');
+    } else {
+        $('#closeNavbar').css('color', 'white');
+    }
+
+    $('.colour_slider').on('mousedown', (e) => {
+
+        var sliderElem = $(e.target);
+
+        $(window).on('mousemove', (ev) => {
+            currentRegHSLuv[sliderElem.attr('id')] = ev.pageX / $(window).width() * 100;
+            updateColourView(currentRegHSLuv);
+        });
+
+        currentRegHSLuv[sliderElem.attr('id')] = e.pageX / $(window).width() * 100;
+        updateColourView(currentRegHSLuv);
+    })
+
+    $(window).on('mouseup', (ev) => {
+        $(window).off('mousemove');
+    });
+
+    updateColourView(currentRegHSLuv);
+}
+
 // Check user status
 
 /*
@@ -71,13 +147,14 @@ $(() => {
         var elem = $(e);
 
         var colour_hsluv = [Math.random() * 360, Math.random() * 100, Math.random() * 100];
-        console.log(colour_hsluv);
 
         elem.css('background-color', hsluv.Hsluv.hsluvToHex(colour_hsluv));
-        wm.set(elem.get(), colour_hsluv);
+        elem.attr('colour_reg_hsluv', regulariseHSLuv(colour_hsluv).toString());
 
-        elem.on('click', (e) => {
+        elem.on('click', (ev) => {
             modalView.openModal($('.navBar'), $('.veil'), '70%');
+
+            initialiseColourView($(ev.target));
         });
     });
 
