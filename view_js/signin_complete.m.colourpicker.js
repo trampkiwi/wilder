@@ -99,7 +99,7 @@ function addPastColour(regHsl) {
         pastColourBoxes[pastColourBoxes.length - 1].remove();
     }
 
-    pastColourBoxes[0].on('click', (e) => {
+    pastColourBoxes.eq(0).on('click', (e) => {
         var cCElem = $('.current_colour');
         var cRegHsl = cCElem.attr('colour_reg_hsluv');
         var clickedRegHsl = $(e.target).attr('colour_reg_hsluv');
