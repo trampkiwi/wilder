@@ -1,6 +1,7 @@
 // ------------- Colour picker code ----------------
 
-var currentRegHSLuv = [0, 0, 0]; // Current colour that the colour selector is in, in HSLuv.
+var currentRegHSLuv = [-1, -1, -1]; // Current colour that the colour selector is in, in HSLuv.
+var prevRegHSLuv = [-1, -1, -1];
 
 function regulariseHSLuv(Hsluv) {
     var modHsluv = [...Hsluv];
@@ -51,6 +52,7 @@ function updateColourView(currentRegHSL) {
 
 function initialiseColourView(barElem) {
     currentRegHSLuv = barElem.attr('colour_reg_hsluv').split(',').map(x => +x);
+    prevRegHSLuv = [...currentRegHSLuv];
 
     $('.colour_slider').on('touchstart', (e, esupp) => {
         if(typeof e.pageX == 'undefined') { e = esupp; e.target = $(esupp.target).parent().get(); }
@@ -102,17 +104,21 @@ function initialiseColourPicker() {
         });
     });
 
-    $('#colour_picker .closeNavbar').on('click', (e) => {
+    var colourPickerClosed = function() {
         modalView.closeModal($('#colour_picker'), $('#colour_picker_veil'));
         $(window).off('touchmove');
         $('.colour_slider').off('touchstart');
         $('.slider_handle').off('touchstart');
-    })
 
-    $('#colour_picker_veil').on('click', (e) => {
-        modalView.closeModal($('#colour_picker'), $('#colour_picker_veil'));
-        $(window).off('touchmove');
-        $('.colour_slider').off('touchstart');
-        $('.slider_handle').off('touchstart');
-    });
+        if(prevRegHSLuv[0] != currentRegHSLuv[0] || prevRegHSLuv[1] != currentRegHSLuv[1] || prevRegHSLuv[2] != currentRegHSLuv[2]) { // a bit messy!
+            $('.current_colour').after(`
+                <div class="past_colour" colour_reg_hsluv="${prevRegHSLuv.toString()}"
+                    style="background-color: ${hsluv.Hsluv.hsluvToHex(recoverHSLuv(prevRegHSLuv))}"></div>
+            `);
+        }
+    };
+
+    $('#colour_picker .closeNavbar').on('click', colourPickerClosed);
+
+    $('#colour_picker_veil').on('click', colourPickerClosed);
 }
