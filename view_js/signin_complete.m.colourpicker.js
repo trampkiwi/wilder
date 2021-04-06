@@ -115,6 +115,12 @@ function initialiseColourPicker() {
                 <div class="past_colour" colour_reg_hsluv="${prevRegHSLuv.toString()}"
                     style="background-color: ${hsluv.Hsluv.hsluvToHex(recoverHSLuv(prevRegHSLuv))}"></div>
             `);
+
+            var pastColourBoxes = $('.past_colour');
+
+            if(pastColourBoxes.length > 6) {
+                pastColourBoxes[pastColourBoxes.length - 1].remove();
+            }
         }
     };
 

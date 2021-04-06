@@ -51,13 +51,13 @@
 
 #drawing_view .lower .current_colour {
     width: 4rem;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 }
 
 #drawing_view .lower .past_colour {
     flex-grow: 1;
     max-width: 4rem;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 
 #drawing_view .lower .sample_colour {
