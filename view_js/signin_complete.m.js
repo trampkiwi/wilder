@@ -85,6 +85,7 @@ function initialiseColourView(barElem) {
         var sliderElem = $(e.target);
 
         $(window).on('mousemove', (ev) => {
+            ev.preventDefault();
             currentRegHSLuv[sliderElem.attr('id')] = ev.pageX / $(window).width() * 100;
             updateColourView(currentRegHSLuv);
         });
