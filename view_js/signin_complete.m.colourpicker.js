@@ -41,9 +41,9 @@ function updateColourView(currentRegHSL) {
     });
 
     if(currentRegHSL[2] > 50) {
-        $('.navBar .closeNavbar').css('color', 'black');
+        $('#colour_picker .closeNavbar').css('color', 'black');
     } else {
-        $('.navBar .closeNavbar').css('color', 'white');
+        $('#colour_picker .closeNavbar').css('color', 'white');
     }
 }
 
