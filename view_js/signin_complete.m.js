@@ -67,18 +67,18 @@ function updateColourView(currentRegHSL) {
 
         sliderHandle.css('left', ($(window).width() * currentRegHSL[i] / 100 - 14.5).toString() + 'px');
     });
+
+    if(currentRegHSL[2] > 50) {
+        $('#closeNavbar').css('color', 'black');
+    } else {
+        $('#closeNavbar').css('color', 'white');
+    }
 }
 
 // Initiate colour picker
 
 function initialiseColourView(barElem) {
     currentRegHSLuv = barElem.attr('colour_reg_hsluv').split(',').map(x => +x);
-
-    if(currentRegHSLuv[2] > 50) {
-        $('#closeNavbar').css('color', 'black');
-    } else {
-        $('#closeNavbar').css('color', 'white');
-    }
 
     $('.colour_slider').on('touchstart', (e, esupp) => {
         if(typeof e.pageX == 'undefined') { e = esupp; e.target = $(esupp.target).parent().get(); }
