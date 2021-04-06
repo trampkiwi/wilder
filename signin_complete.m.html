@@ -88,8 +88,9 @@
             }
 
             #drawing_canvas {
-                width: 100vw;
-                height: 100vw;
+                display: none;
+                width: 100px;
+                height: 100px;
                 background-color: yellow;
             }
 
@@ -98,7 +99,15 @@
             }
 
             #drawing_view .upper, #drawing_view .lower {
+                height: 2rem;
+            }
+
+            #drawing_view .canvas_container {
                 flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: -1;
             }
         </style>
 
@@ -179,7 +188,9 @@
             <div class="upper">
             </div>
 
-            <canvas id="drawing_canvas"></canvas>
+            <div class="canvas_container">
+                <canvas id="drawing_canvas"></canvas>
+            </div>
 
             <div class="lower">
             </div>

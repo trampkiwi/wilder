@@ -5,6 +5,11 @@ modalView.openModal = function(mv, veil, height, doFreezeBody) { // Default beha
     veil.css('background-color', 'rgba(0, 0, 0, 0.5)');
 
     mv.css('height', height);
+    var transitionEndPromise = new Promise((resolve, reject) => {
+        mv.on('transitionend', () => {
+            resolve();
+        });
+    });
 
     if(doFreezeBody || typeof doFreezeBody == 'undefined') {
         var body = $('body');
@@ -13,6 +18,8 @@ modalView.openModal = function(mv, veil, height, doFreezeBody) { // Default beha
         body.css('left', '0');
         body.css('position', 'fixed');
     }
+
+    return transitionEndPromise;
 };
 
 modalView.closeModal = function(mv, veil, wasBodyFrozen) {
@@ -22,6 +29,11 @@ modalView.closeModal = function(mv, veil, wasBodyFrozen) {
     });
 
     mv.css('height', '0');
+    var transitionEndPromise = new Promise((resolve, reject) => {
+        mv.on('transitionend', () => {
+            resolve();
+        });
+    });
 
     if(wasBodyFrozen || typeof wasBodyFrozen == 'undefined') { // Default behaviour is to unfreeze the body.
 
@@ -35,4 +47,6 @@ modalView.closeModal = function(mv, veil, wasBodyFrozen) {
             body.scrollTop(scrollPos);
         }, 2);
     }
+    
+    return transitionEndPromise;
 }
