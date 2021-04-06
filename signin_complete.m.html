@@ -92,6 +92,14 @@
                 height: 100vw;
                 background-color: yellow;
             }
+
+            #drawing_view .header h1 {
+                font-size: 1.3rem;
+            }
+
+            #drawing_view .upper, #drawing_view .lower {
+                flex-grow: 1;
+            }
         </style>
 
         <!-- Google Firebase config -->
@@ -168,7 +176,13 @@
                 <h1>Drawing profile picture</h1>
             </div>
 
+            <div class="upper">
+            </div>
+
             <canvas id="drawing_canvas"></canvas>
+
+            <div class="lower">
+            </div>
         </div>
 
         <!-- Colour picker modal -->
