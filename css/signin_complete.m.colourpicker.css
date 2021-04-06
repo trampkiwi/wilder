@@ -1,11 +1,5 @@
 /* -------- colour picker properties --------- */
 
-.pick_colour {
-    width: 100%;
-    height: 3rem;
-    border: 2px dotted var(--hr-and-line-col);
-}
-
 .colour_slider {
     width: 100%;
     height: 2.5rem;
