@@ -97,7 +97,7 @@ hr {
     flex-grow: 1;
 }
 
-#closeNavbar {
+.navBar .closeNavbar {
     position: absolute;
     right: 20px;
     top: 20px;
