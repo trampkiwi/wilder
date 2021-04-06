@@ -80,7 +80,7 @@ function initialiseColourView(barElem) {
         $('#closeNavbar').css('color', 'white');
     }
 
-    $('.colour_slider').on('mousedown', (e, esupp) => {
+    $('.colour_slider').on('touchstart', (e, esupp) => {
         if(typeof e.pageX == 'undefined') { e = esupp; e.target = $(esupp.target).parent().get(); }
 
         var sliderElem = $(e.target);
@@ -90,24 +90,24 @@ function initialiseColourView(barElem) {
             currentRegHSLuv[sliderElem.attr('id')] = ev.pageX / $(window).width() * 100;
             updateColourView(currentRegHSLuv);
             
-            if(ev.pageX < 0 || ev.pageX > $(window).width()) { $(window).off('mousemove'); }
+            if(ev.pageX < 0 || ev.pageX > $(window).width()) { $(window).off('touchmove'); }
 
             barElem.attr('colour_reg_hsluv', currentRegHSLuv.toString());
             barElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(currentRegHSLuv)));
         };
 
-        $(window).on('mousemove', moveCallback);
+        $(window).on('touchmove', moveCallback);
 
-        currentRegHSLuv[sliderElem.attr('id')] = e.pageX / $(window).width() * 100;
-        updateColourView(currentRegHSLuv);
+        moveCallback(e);
     });
 
-    $('.slider_handle').on('mousedown', (e) => {
-        $(e.target).parent().trigger('mousedown', e);
+    $('.slider_handle').on('touchstart', (e) => {
+        e.preventDefault();
+        $(e.target).parent().trigger('touchstart', e);
     })
 
-    $(window).on('mouseup', (ev) => {
-        $(window).off('mousemove');
+    $(window).on('touchend', (ev) => {
+        $(window).off('touchmove');
     });
 
     updateColourView(currentRegHSLuv);
@@ -173,15 +173,15 @@ $(() => {
 
     $('#closeNavbar').on('click', (e) => {
         modalView.closeModal($('.navBar'), $('.veil'));
-        $(window).off('mousemove');
-        $('.colour_slider').off('mousedown');
-        $('.slider_handle').off('mousedown');
+        $(window).off('touchmove');
+        $('.colour_slider').off('touchstart');
+        $('.slider_handle').off('touchstart');
     })
 
     $('.veil').on('click', (e) => {
         modalView.closeModal($('.navBar'), $('.veil'));
-        $(window).off('mousemove');
-        $('.colour_slider').off('mousedown');
-        $('.slider_handle').off('mousedown');
+        $(window).off('touchmove');
+        $('.colour_slider').off('touchstart');
+        $('.slider_handle').off('touchstart');
     });
 });
