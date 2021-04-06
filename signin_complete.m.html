@@ -29,96 +29,11 @@
             .tutorial_content {
                 display: none;
             }
-
-            /* -------- colour picker properties --------- */
-
-            .pick_colour {
-                width: 100%;
-                height: 3rem;
-                border: 2px dotted var(--hr-and-line-col);
-            }
-
-            .colour_slider {
-                width: 100%;
-                height: 2.5rem;
-                border-top: 2px solid white;
-            }
-
-            .slider_handle {
-                height: 100%;
-                width: 15px;
-                border: 5px solid white;
-                position: relative;
-                top: -5px;
-                left: 50%;
-            }
-
-            #colour_display {
-                width: 100%;
-                flex-grow: 1;
-            }
-
-            #colour_picker_veil {
-                z-index: 4;
-            }
-
-            #colour_picker {
-                z-index: 5;
-            }
-
-            /* ---------- profile pic rel. --------- */
-
-            .profile_pic_display {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            .profile_container {
-                display: inline-block;
-                padding: 1rem;
-                padding-top: 4rem;
-                margin-top: 1rem;
-                position: relative;
-                width: 13rem;
-                height: 13rem;
-                font-size: 1.2em;
-            }
-
-            #drawing_canvas {
-                display: none;
-                width: 100px;
-                height: 100px;
-                background-color: yellow;
-            }
-
-            #drawing_view .header h1 {
-                font-size: 1.3rem;
-            }
-
-            #drawing_view .upper, #drawing_view .lower {
-                height: 4rem;
-            }
-
-            #drawing_view .upper {
-                border-bottom: 2px dotted var(--hr-and-line-col);
-            }
-
-            #drawing_view .lower {
-                border-top: 2px dotted var(--hr-and-line-col);
-            }
-
-            #drawing_view .canvas_container {
-                flex-grow: 1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: -1;
-            }
         </style>
 
+        <link rel="stylesheet" href="/css/signin_complete.m.colourpicker.css">
+        <link rel="stylesheet" href="/css/signin_complete.m.profiledrawing.css">
+        
         <!-- Google Firebase config -->
 
         <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
@@ -201,6 +116,9 @@
             </div>
 
             <div class="lower">
+                <div class="current_colour"></div>
+                <div class="brush_size"></div>
+                <div class="undo"></div>
             </div>
         </div>
 

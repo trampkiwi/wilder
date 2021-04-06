@@ -1,0 +1,35 @@
+/* -------- colour picker properties --------- */
+
+.pick_colour {
+    width: 100%;
+    height: 3rem;
+    border: 2px dotted var(--hr-and-line-col);
+}
+
+.colour_slider {
+    width: 100%;
+    height: 2.5rem;
+    border-top: 2px solid white;
+}
+
+.slider_handle {
+    height: 100%;
+    width: 15px;
+    border: 5px solid white;
+    position: relative;
+    top: -5px;
+    left: 50%;
+}
+
+#colour_display {
+    width: 100%;
+    flex-grow: 1;
+}
+
+#colour_picker_veil {
+    z-index: 4;
+}
+
+#colour_picker {
+    z-index: 5;
+}

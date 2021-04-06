@@ -1,0 +1,66 @@
+/* ---------- profile pic rel. --------- */
+
+.profile_pic_display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.profile_container {
+    display: inline-block;
+    padding: 1rem;
+    padding-top: 4rem;
+    margin-top: 1rem;
+    position: relative;
+    width: 13rem;
+    height: 13rem;
+    font-size: 1.2em;
+}
+
+#drawing_canvas {
+    display: none;
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+}
+
+#drawing_view .header h1 {
+    font-size: 1.3rem;
+}
+
+#drawing_view .upper, #drawing_view .lower {
+    height: 4rem;
+}
+
+#drawing_view div {
+    display: inline-block;
+}
+
+#drawing_view .upper {
+    border-bottom: 2px dotted var(--hr-and-line-col);
+}
+
+#drawing_view .lower {
+    border-top: 2px dotted var(--hr-and-line-col);
+    display: flex;
+    flex-flow: row;
+}
+
+#drawing_view .lower .current_colour, #drawing_view .lower .undo {
+    width: 4rem;
+    border: 1px solid black;
+}
+
+#drawing_view .lower .brush_size {
+    flex-grow: 1;
+}
+
+#drawing_view .canvas_container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
