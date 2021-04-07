@@ -111,6 +111,10 @@ $(() => {
                 // Attempt to put the image file to firebase storage
                 await profilePicRef.putString(profilePicURI, 'data_url');
 
+                var staticProfPicURL = await profilePicRef.getDownloadURL();
+
+                console.log(staticProfPicURL);
+
                 var now = Date.now();
 
                 // Attempt to create the user profile in realtime database
