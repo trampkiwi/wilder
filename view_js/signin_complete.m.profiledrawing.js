@@ -1,10 +1,14 @@
 var cvsElem;
 var cvsHistoryElem;
+var cvsHistoryElems = [];
+var historyLimit = 7;
 var ctx;
 var historyCtx;
 var hasInitialised = false;
 var isSamplingColour = false;
 var isFillMode = false;
+
+var dimension;
 
 var cCElem;
 
@@ -110,7 +114,6 @@ function sampleColourCallback(ev) {
 
 function initialiseProfileDrawingView() {
     cvsElem = $('#drawing_canvas');
-    cvsHistoryElem = $('#drawing_canvas_history');
 
     $('.profile_pic_display').on('click', (e) => {
         modalView.openModal($('#drawing_view'), $('#drawing_view_veil'), '100%').then(() => {
@@ -121,15 +124,13 @@ function initialiseProfileDrawingView() {
 
                 scale = window.devicePixelRatio;
 
-                var dimension = Math.min(containerWidth, containerHeight);
+                dimension = Math.min(containerWidth, containerHeight);
 
                 cvsElem.css('width', dimension);
                 cvsElem.css('height', dimension);
 
                 cvsElem.attr('width', dimension * scale);
                 cvsElem.attr('height', dimension * scale);
-                cvsHistoryElem.attr('width', dimension * scale);
-                cvsHistoryElem.attr('height', dimension * scale);
 
                 cvsElem.css('display', 'inline-block');
 
@@ -140,11 +141,6 @@ function initialiseProfileDrawingView() {
 
                 ctx.lineJoin = 'round';
                 ctx.lineCap = 'round';
-
-                historyCtx = cvsHistoryElem.get(0).getContext('2d');
-
-                historyCtx.fillStyle = '#ffffff';
-                historyCtx.fillRect(0, 0, cvsHistoryElem.attr('width'), cvsHistoryElem.attr('height'));
 
                 ctx.lineWidth = 3 * scale;
 
@@ -186,7 +182,12 @@ function initialiseProfileDrawingView() {
     });
 
     $('.undo').on('click', (e) => { // Load state from history canvas
-        ctx.drawImage(cvsHistoryElem.get(0), 0, 0);
+        if(cvsHistoryElems.length > 0) {
+            ctx.drawImage(cvsHistoryElems[cvsHistoryElems.length - 1].get(0), 0, 0);
+
+            cvsHistoryElems[cvsHistoryElems.length - 1].remove();
+            cvsHistoryElems.pop();
+        }
 
         deactivateSamplingMode();
         deactivateFillMode();
@@ -223,7 +224,19 @@ function initialiseProfileDrawingView() {
         } else if(isFillMode) { // Fill mode
             // Save current sate in hidden history canvas
 
-            historyCtx.drawImage(cvsElem.get(0), 0, 0);
+            $('#drawing_canvas').before('<canvas class="drawing_canvas_history"></canvas>');
+
+            cvsHistoryElems.push($('.drawing_canvas_history').last());
+
+            cvsHistoryElems[cvsHistoryElems.length - 1].attr('width', dimension * scale);
+            cvsHistoryElems[cvsHistoryElems.length - 1].attr('height', dimension * scale);
+
+            cvsHistoryElems[cvsHistoryElems.length - 1].get(0).getContext('2d').drawImage(cvsElem.get(0), 0, 0);
+
+            if(cvsHistoryElems.length > historyLimit) {
+                cvsHistoryElems[0].remove();
+                cvsHistoryElems.shift();
+            }
 
             // Clear event handlers
 
@@ -242,7 +255,19 @@ function initialiseProfileDrawingView() {
 
             // Save current sate in hidden history canvas
 
-            historyCtx.drawImage(cvsElem.get(0), 0, 0);
+            $('#drawing_canvas').before('<canvas class="drawing_canvas_history"></canvas>');
+
+            cvsHistoryElems.push($('.drawing_canvas_history').last());
+
+            cvsHistoryElems[cvsHistoryElems.length - 1].attr('width', dimension * scale);
+            cvsHistoryElems[cvsHistoryElems.length - 1].attr('height', dimension * scale);
+
+            cvsHistoryElems[cvsHistoryElems.length - 1].get(0).getContext('2d').drawImage(cvsElem.get(0), 0, 0);
+
+            if(cvsHistoryElems.length > historyLimit) {
+                cvsHistoryElems[0].remove();
+                cvsHistoryElems.shift();
+            }
 
             // Canvas init
 

@@ -1,11 +1,18 @@
 /* ---------- profile pic rel. --------- */
 
+.canvas_container {
+    overflow: hidden;
+}
+
 #drawing_canvas {
     display: none;
+    position: relative;
+    left: 0;
+    top: 0;
     border: 2px dotted var(--hr-and-line-col);
 }
 
-#drawing_canvas_history {
+.drawing_canvas_history {
     display: none;
     border: 2px dotted var(--hr-and-line-col);
 }
