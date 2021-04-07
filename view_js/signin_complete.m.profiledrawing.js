@@ -82,8 +82,6 @@ function drawCallback(ev) {
         ctx.stroke();
     }
 
-    $('.canvas_container').css('background-color', `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
-
     pPrevTouch.x = prevTouch.x;
     pPrevTouch.y = prevTouch.y;
 
@@ -202,8 +200,8 @@ function initialiseProfileDrawingView() {
 
     cvsElem.on('touchstart', (e) => {
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
-        cvsOffsetCoords.x = cvsOffset.top;
-        cvsOffsetCoords.y = cvsOffset.left;
+        cvsOffsetCoords.x = cvsOffset.left;
+        cvsOffsetCoords.y = cvsOffset.top;
 
         if(isSamplingColour) { // Sampling mode
             cCElem = $('.current_colour');
