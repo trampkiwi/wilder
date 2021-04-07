@@ -92,6 +92,8 @@ function drawCallback(ev) {
 function sampleColourCallback(ev) {
     ev.preventDefault();
 
+    $('#drawing_view .header').css('background-color', `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
+
     touchCoords.x = ev.touches[0].pageX - cvsOffsetCoords.x;
     touchCoords.y = ev.touches[0].pageY - cvsOffsetCoords.y;
 
@@ -198,7 +200,6 @@ function initialiseProfileDrawingView() {
     });
 
     cvsElem.on('touchstart', (e) => {
-        alert('touch start!');
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
         cvsOffsetCoords.x = cvsOffset.x;
         cvsOffsetCoords.y = cvsOffset.y;
