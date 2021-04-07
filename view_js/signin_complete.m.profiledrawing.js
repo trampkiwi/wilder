@@ -69,7 +69,7 @@ function drawCallback(ev) {
     var pPrevTouchExists = pPrevTouch.x != null && pPrevTouch.y != null;
     var prevTouchExists = prevTouch.x != null & prevTouch.y != null;
 
-    if(pPrevTouchExists) {
+    /*if(pPrevTouchExists) {
         ctx.beginPath();
         ctx.moveTo(pPrevTouch.x * scale, pPrevTouch.y * scale);
         ctx.lineTo(prevTouch.x * scale, prevTouch.y * scale);
@@ -80,7 +80,12 @@ function drawCallback(ev) {
         ctx.moveTo(prevTouch.x * scale, prevTouch.y * scale);
         ctx.lineTo(touchCoords.x * scale, touchCoords.y * scale);
         ctx.stroke();
-    }
+    }*/
+
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(100, 100);
+    ctx.stroke();
 
     $('.canvas_container').css('background-color', `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
 
