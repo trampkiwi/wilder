@@ -24,9 +24,18 @@ function signout() {
     });
 }
 
+function initialiseProfileSetup() {
+    // Set profile picture to some random example.
+
+    $('.profile_container').css('background-image', `url("/Assets/profile_pic_ex${Math.floor(Math.random() * 3 + 1)}.jpg")`);
+
+    initialiseProfileDrawingView();
+
+    initialiseColourPicker();
+}
+
 // Check user status
 
-/*
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) { // User is signed in
         // Check if user is approved: The following query only returns a valid read if the user is approved.
@@ -45,6 +54,8 @@ firebase.auth().onAuthStateChanged(function(user) {
                 // Display 'last step' in registration
                 $('#registerLastStep').css('display', 'block');
 
+                initialiseProfileSetup();
+
             } else { // User has registered before.
                 // Show page content bar tutorial options
                 $('#registerCompleteContent').css('display', 'block');
@@ -58,19 +69,4 @@ firebase.auth().onAuthStateChanged(function(user) {
     } else { // User is not signed in: erroneous state
         window.location.replace('/');
     }
-});
-*/
-
-// Init
-
-$(() => {
-
-    // Set profile picture to some random example.
-
-    $('.profile_container').css('background-image', `url("/Assets/profile_pic_ex${Math.floor(Math.random() * 3 + 1)}.jpg")`);
-
-    // TODO: these should all be in the dat == null clause in the onAuthStateChanged function above.
-    initialiseProfileDrawingView();
-
-    initialiseColourPicker();
 });
