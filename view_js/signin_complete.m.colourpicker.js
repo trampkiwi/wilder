@@ -149,7 +149,6 @@ function initialiseColourPicker() {
     });
 
     var colourPickerClosed = function() {
-        modalView.closeModal($('#colour_picker'), $('#colour_picker_veil'));
         $(window).off('touchmove');
         $('.colour_slider').off('touchstart');
         $('.slider_handle').off('touchstart');
@@ -157,6 +156,8 @@ function initialiseColourPicker() {
         if(prevRegHSLuv[0] != currentRegHSLuv[0] || prevRegHSLuv[1] != currentRegHSLuv[1] || prevRegHSLuv[2] != currentRegHSLuv[2]) { // a bit messy!
             addPastColour(prevRegHSLuv);
         }
+
+        modalView.closeModal($('#colour_picker'), $('#colour_picker_veil'));
     };
 
     $('#colour_picker .closeNavbar').on('click', colourPickerClosed);
