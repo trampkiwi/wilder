@@ -250,6 +250,8 @@ function initialiseProfileDrawingView() {
 
             ctx.strokeStyle = $('.current_colour').css('background-color');
 
+            alert(ctx.strokeStyle);
+
             $(window).on('touchend', () => {
                 cvsElem.off('touchmove');
 
