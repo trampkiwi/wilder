@@ -43,7 +43,7 @@ function initialiseProfileSetup() {
 
 // Check user status
 
-/*firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function(user) {
     if (user) { // User is signed in
         // Check if user is approved: The following query only returns a valid read if the user is approved.
 
@@ -76,8 +76,14 @@ function initialiseProfileSetup() {
     } else { // User is not signed in: erroneous state
         window.location.replace('/');
     }
-});*/
+});
 
 $(() => {
-    initialiseProfileSetup();
+    $('#confirm_signup_complete').on('click', () => {
+        var db = firebase.database();
+
+        var user = firebase.auth().currentUser;
+
+        console.log(user);
+    });
 });
