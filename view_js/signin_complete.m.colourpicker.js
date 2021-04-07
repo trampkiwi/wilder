@@ -38,7 +38,7 @@ function updateColourView(currentRegHSL) {
 
         var sliderHandle = sliderElem.find('.slider_handle');
 
-        sliderHandle.css('left', ($(window).width() * currentRegHSL[i] / 100 - 13.5).toString() + 'px');
+        sliderHandle.css('left', ($(window).width() * currentRegHSL[i] / 100 - 7.5).toString() + 'px');
     });
 
     if(currentRegHSL[2] > 50) {
@@ -55,16 +55,19 @@ function initialiseColourView(barElem) {
     prevRegHSLuv = [...currentRegHSLuv];
 
     $('.colour_slider').on('touchstart', (e, esupp) => {
-        if(typeof e.pageX == 'undefined') { e = esupp; e.target = $(esupp.target).parent().get(); }
+        if(typeof e.touches == 'undefined') { e = esupp; e.target = $(esupp.target).parent().get(); }
+        var touch = e.touches[0];
 
         var sliderElem = $(e.target);
         
         var moveCallback = (ev) => {
+            var t = ev.touches[0];
+
             ev.preventDefault();
-            currentRegHSLuv[sliderElem.attr('id')] = ev.pageX / $(window).width() * 100;
+            currentRegHSLuv[sliderElem.attr('id')] = t.pageX / $(window).width() * 100;
             updateColourView(currentRegHSLuv);
             
-            if(ev.pageX < 0 || ev.pageX > $(window).width()) { $(window).off('touchmove'); }
+            if(t.pageX < 0 || t.pageX > $(window).width()) { $(window).off('touchmove'); }
 
             barElem.attr('colour_reg_hsluv', currentRegHSLuv.toString());
             barElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(currentRegHSLuv)));
@@ -84,6 +87,15 @@ function initialiseColourView(barElem) {
         $(window).off('touchmove');
     });
 
+    $('.slider_handle').on('mousedown', (e) => {
+        e.preventDefault();
+        $(e.target).parent().trigger('mousedown', e);
+    })
+
+    $(window).on('mouseup', (ev) => {
+        $(window).off('mousemove');
+    });
+
     updateColourView(currentRegHSLuv);
 }
 
@@ -101,12 +113,20 @@ function addPastColour(regHsl) {
 
     pastColourBoxes.eq(0).on('click', (e) => {
         var cCElem = $('.current_colour');
-        var cRegHsl = cCElem.attr('colour_reg_hsluv');
-        var clickedRegHsl = $(e.target).attr('colour_reg_hsluv');
+        var cRegHsl = cCElem.attr('colour_reg_hsluv').split(',').map((v) => {
+            return parseFloat(v);
+        });
+        var clickedRegHsl = $(e.target).attr('colour_reg_hsluv').split(',').map((v) => {
+            return parseFloat(v);
+        });
+        console.log(cRegHsl);
+        console.log(clickedRegHsl);
 
-        cCElem.attr('colour_reg_hsluv', clickedRegHsl);
-        cCElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(clickedRegHsl)));
-        addPastColour(cRegHsl);
+        if(cRegHsl[0] != clickedRegHsl[0] || cRegHsl[1] != clickedRegHsl[1] || cRegHsl[2] != clickedRegHsl[2]) {
+            cCElem.attr('colour_reg_hsluv', clickedRegHsl.toString());
+            cCElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(clickedRegHsl)));
+            addPastColour(cRegHsl);
+        }
     });
 }
 
