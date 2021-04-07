@@ -81,6 +81,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 $(() => {
     $('#confirm_signup_complete').on('click', async function() {
+        $('#confirm_signup_complete').css('visibility', 'hidden');
+
         var userNameText = $('#user_displayname').val();
         var profilePicURI = $('.profile_pic_display').attr('src');
         var warningText = $('#signup_warning');
@@ -126,8 +128,12 @@ $(() => {
             } catch (error) {
                 warningText.html(error.message);
 
+                $('#confirm_signup_complete').css('visibility', 'visible');
+
                 throw error;
             }
         }        
+
+        $('#confirm_signup_complete').css('visibility', 'visible');
     });
 });
