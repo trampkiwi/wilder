@@ -68,6 +68,8 @@ function drawCallback(ev) {
 
     var pPrevTouchExists = pPrevTouch.x != null && pPrevTouch.y != null;
     var prevTouchExists = prevTouch.x != null & prevTouch.y != null;
+
+    alert('checkpoint 1!');
     
     if(pPrevTouchExists) {
         ctx.beginPath();
@@ -81,6 +83,8 @@ function drawCallback(ev) {
         ctx.lineTo(touchCoords.x * scale, touchCoords.y * scale);
         ctx.stroke();
     }
+
+    alert('checkpoint 2!');
 
     pPrevTouch.x = prevTouch.x;
     pPrevTouch.y = prevTouch.y;
@@ -96,14 +100,11 @@ function sampleColourCallback(ev) {
     touchCoords.y = ev.touches[0].pageY - cvsOffsetCoords.y;
 
     var sampledColour = ctx.getImageData(touchCoords.x * scale, touchCoords.y * scale, 1, 1).data;
-    alert('image sampled');
     var sampledColourReg = [];
 
     for(var i = 0; i < 3; i++) { sampledColourReg.push(sampledColour[i] / 255); }
 
     ctx.strokeStyle = `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`;
-
-    alert(ctx.strokeStyle);
 
     cCElem.attr('colour_reg_hsluv', regulariseHSLuv(hsluv.Hsluv.rgbToHsluv(sampledColourReg)).toString());
     
