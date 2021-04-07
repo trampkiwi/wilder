@@ -82,7 +82,7 @@ function drawCallback(ev) {
         ctx.stroke();
     }
 
-    cvsElem.css('background-color', `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
+    $('.canvas_container').css('background-color', `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
 
     pPrevTouch.x = prevTouch.x;
     pPrevTouch.y = prevTouch.y;
