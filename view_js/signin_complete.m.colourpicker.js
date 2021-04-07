@@ -119,14 +119,19 @@ function addPastColour(regHsl) {
         var cRegHsl = cCElem.attr('colour_reg_hsluv').split(',').map((v) => {
             return parseFloat(v);
         });
-        var clickedRegHsl = $(e.target).attr('colour_reg_hsluv').split(',').map((v) => {
+        var clickedElem = $(e.target);
+        var clickedRegHsl = clickedElem.attr('colour_reg_hsluv').split(',').map((v) => {
             return parseFloat(v);
         });
 
         if(cRegHsl[0] != clickedRegHsl[0] || cRegHsl[1] != clickedRegHsl[1] || cRegHsl[2] != clickedRegHsl[2]) {
+            // Swap current colour with clicked colour
+
+            clickedElem.attr('colour_reg_hsluv', cRegHsl.toString());
+            clickedElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(cRegHsl)));
+
             cCElem.attr('colour_reg_hsluv', clickedRegHsl.toString());
             cCElem.css('background-color', hsluv.Hsluv.hsluvToHex(recoverHSLuv(clickedRegHsl)));
-            addPastColour(cRegHsl);
         }
     });
 }
