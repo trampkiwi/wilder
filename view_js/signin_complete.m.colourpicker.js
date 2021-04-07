@@ -60,7 +60,6 @@ function initialiseColourView(barElem) {
 
     $('.colour_slider').on('touchstart', (e, esupp) => {
         if(typeof e.touches == 'undefined') { e = esupp; e.target = $(esupp.target).parent().get(); }
-        var touch = e.touches[0];
 
         var sliderElem = $(e.target);
         

@@ -259,6 +259,11 @@ function initialiseProfileDrawingView() {
     
             cvsElem.on('touchmove', drawCallback);
             drawCallback(e);
+
+            ctx.beginPath();
+            ctx.arc(touchCoords.x * scale, touchCoords.y * scale, ctx.lineWidth / 2, 0, 2 * Math.PI, false);
+            ctx.fillStyle = ctx.strokeStyle;
+            ctx.fill();
         }
     });
 }

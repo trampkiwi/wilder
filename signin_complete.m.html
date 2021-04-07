@@ -40,8 +40,6 @@
 
             .profile_container {
                 display: inline-block;
-                padding: 1rem;
-                padding-top: 5rem;
                 margin-top: 1rem;
                 position: relative;
                 width: 14rem;
@@ -52,10 +50,19 @@
                 background-size: cover;
             }
 
+            .cover_profile {
+                padding: 1rem;
+                padding-top: 5rem;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+
             #user_displayname {
                 width: 80vw;
-                font-size: 1.6em;
+                font-size: 1.6rem;
                 margin-top: 1em;
+                margin-bottom: 0.7em;
             }
         </style>
 
@@ -114,11 +121,17 @@
             <hr>
 
             <div class="profile_container">
-                Click here to draw your profile picture!
+                <div class="cover_profile">
+                    Click here to draw your profile picture!
+                </div>
                 <img class="profile_pic_display">
             </div>
 
             <input type="text" id="user_displayname" class="handwriting" placeholder="Kiwi the great explorer">
+
+            <hr>
+            
+            <a href="#" class="navlink" id="confirm_signup_complete">I'm ready!</a>
         </div>
 
         <!-- Drawing modal -->
