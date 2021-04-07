@@ -54,7 +54,6 @@ firebase.auth().onAuthStateChanged(function(user) {
         db.ref('/users/' + uid).once('value').then((snapShot) => { // User is approved.
 
             var dat = snapShot.val();
-            console.log(dat);
             
             if(dat == null) { // User has not registered before.
 
@@ -85,5 +84,10 @@ $(() => {
         var user = firebase.auth().currentUser;
 
         console.log(user);
+
+        var storageRef = firebase.storage().ref();
+        var profilePicRef = storageRef.child(`public_content/${user.uid}/profilePic.jpg`);
+
+        console.log($('.profile_pic_display').attr('src'));
     });
 });
