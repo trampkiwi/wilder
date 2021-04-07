@@ -82,7 +82,7 @@ function drawCallback(ev) {
         ctx.stroke();
     }*/
 
-    alert(scale);
+    alert(`${prevTouch.x * scale}, ${prevTouch.y * scale}, ${touchCoords.x * scale}, ${touchCoords.y * scale}`);
 
     ctx.beginPath();
     ctx.moveTo(0, 0);
