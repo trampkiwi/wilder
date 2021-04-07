@@ -79,15 +79,25 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 $(() => {
     $('#confirm_signup_complete').on('click', () => {
-        var db = firebase.database();
+        var userNameText = $('#user_displayname').val();
+        var profilePicURI = $('.profile_pic_display').attr('src');
+        var warningText = $('#signup_warning');
 
-        var user = firebase.auth().currentUser;
+        if(typeof profilePicURI == 'undefined') {
+            warningText.html('Please check if you have set your profile picture.');
+        } else if(userNameText == '') {
+            warningText.html('Please check if you have put in your user name.');
+        } else {
+            var db = firebase.database();
 
-        console.log(user);
+            var user = firebase.auth().currentUser;
 
-        var storageRef = firebase.storage().ref();
-        var profilePicRef = storageRef.child(`public_content/${user.uid}/profilePic.jpg`);
+            console.log(user);
 
-        console.log($('.profile_pic_display').attr('src'));
+            var storageRef = firebase.storage().ref();
+            var profilePicRef = storageRef.child(`public_content/${user.uid}/profilePic.jpg`);
+
+            console.log($('.profile_pic_display').attr('src'));
+        }        
     });
 });
