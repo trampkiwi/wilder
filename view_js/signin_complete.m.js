@@ -27,7 +27,7 @@ function signout() {
 function initialiseProfileSetup() {
     // Set profile picture to some random example.
 
-    $('.profile_container').css('background-image', `url("/Assets/profile_pic_ex${Math.floor(Math.random() * 3 + 1)}.jpg")`);
+    $('.profile_container').css('background-image', `url("/Assets/profile_pic_ex${Math.floor(Math.random() * 4 + 1)}.jpg")`);
 
     initialiseProfileDrawingView();
 
