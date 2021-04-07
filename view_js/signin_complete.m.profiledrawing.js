@@ -148,6 +148,8 @@ function initialiseProfileDrawingView() {
 
                 ctx.lineWidth = 3 * scale;
 
+                $('.profile_container').css('background-image', 'none');
+
                 hasInitialised = true;
             }
         });

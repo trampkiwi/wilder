@@ -65,6 +65,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 $(() => {
 
+    // Set profile picture to some random example.
+
+    $('.profile_container').css('background-image', `url("/Assets/profile_pic_ex${Math.floor(Math.random() * 3 + 1)}.jpg")`);
+
     // TODO: these should all be in the dat == null clause in the onAuthStateChanged function above.
     initialiseProfileDrawingView();
 
