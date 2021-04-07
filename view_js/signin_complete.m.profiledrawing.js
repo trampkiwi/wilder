@@ -82,11 +82,11 @@ function drawCallback(ev) {
         ctx.stroke();
     }*/
 
-    alert(`${prevTouch.x * scale}, ${prevTouch.y * scale}, ${touchCoords.x * scale}, ${touchCoords.y * scale}`);
+    alert(`${pPrevTouchExists}, ${prevTouchExists}, ${prevTouch.x * scale}, ${prevTouch.y * scale}, ${touchCoords.x * scale}, ${touchCoords.y * scale}`);
 
     ctx.beginPath();
     ctx.moveTo(0, 0);
-    ctx.lineTo(100, 100);
+    ctx.lineTo(Math.random()*100, Math.random()*100);
     ctx.stroke();
 
     $('.canvas_container').css('background-color', `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
