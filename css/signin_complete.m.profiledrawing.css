@@ -21,15 +21,11 @@
 
 #drawing_canvas {
     display: none;
-    width: 100px;
-    height: 100px;
     border: 2px dotted var(--hr-and-line-col);
 }
 
 #drawing_canvas_history {
     display: none;
-    width: 100px;
-    height: 100px;
     border: 2px dotted var(--hr-and-line-col);
 }
 
@@ -47,6 +43,60 @@
 
 #drawing_view .upper {
     border-bottom: 2px dotted var(--hr-and-line-col);
+    display: flex;
+    flex-flow: row;
+}
+
+#drawing_view .upper .undo {
+    width: 4rem;
+}
+
+#drawing_view .upper .flood_fill {
+    width: 4rem;
+    border-right: 2px dotted var(--hr-and-line-col);
+}
+
+#drawing_view .upper .brush_size {
+    flex-grow: 1;
+    flex-basis: 0px;
+    height: 100%;
+    border-right: 2px dotted var(--hr-and-line-col);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#light_brush {
+    background-color: rgb(22, 22, 22);
+}
+
+#drawing_view .upper .brush_size div {
+    border-radius: 50%;
+}
+
+#light_brush div {
+    background-color: white;
+    width: 3px;
+    height: 3px;
+}
+
+#light_medium_brush div {
+    background-color: rgb(22, 22, 22);
+    width: 9px;
+    height: 9px;
+}
+
+#medium_brush div {
+    background-color: rgb(22, 22, 22);
+    width: 15px;
+    height: 15px;
+}
+
+#large_brush div {
+    background-color: rgb(22, 22, 22);
+    width: 21px;
+    height: 21px;
 }
 
 #drawing_view .lower {
@@ -72,12 +122,7 @@
     margin-left: auto;
 }
 
-#drawing_view .lower .undo {
-    width: 4rem;
-    border-left: 2px dotted var(--hr-and-line-col);
-}
-
-#drawing_view .lower .sample_colour img, #drawing_view .lower .undo img {
+#drawing_view .lower img, #drawing_view .upper img {
     width: 100%;
     height: 100%;
 }
