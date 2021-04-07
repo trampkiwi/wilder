@@ -130,7 +130,7 @@
                 <img class="profile_pic_display">
             </div>
 
-            <input type="text" id="user_displayname" class="handwriting" pattern="[A-Za-z0-9!?&quot;']{1, 25}" placeholder="Kiwi the great explorer">
+            <input type="text" id="user_displayname" class="handwriting" onkeydown="return /[A-Za-z0-9]/i.test(event.key);" placeholder="Kiwi the great explorer">
 
             <hr>
             

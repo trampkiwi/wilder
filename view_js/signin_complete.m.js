@@ -24,6 +24,10 @@ function signout() {
     });
 }
 
+// -------------- profile setup view --------------
+
+// Initialising function for the profile setup view.
+
 function initialiseProfileSetup() {
     // Set profile picture to some random example.
 
@@ -33,6 +37,9 @@ function initialiseProfileSetup() {
 
     initialiseColourPicker();
 }
+
+// -----------------------------------------------
+
 
 // Check user status
 
