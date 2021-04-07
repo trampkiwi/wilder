@@ -82,6 +82,8 @@ function drawCallback(ev) {
         ctx.stroke();
     }*/
 
+    alert(scale);
+
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(100, 100);
