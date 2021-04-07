@@ -92,8 +92,6 @@ function drawCallback(ev) {
 function sampleColourCallback(ev) {
     ev.preventDefault();
 
-    $('#drawing_view .header').css('background-color', `rgb(${ev.touches[0].pageX}, ${ev.touches[0].pageY}, 127)`);
-
     touchCoords.x = ev.touches[0].pageX - cvsOffsetCoords.x;
     touchCoords.y = ev.touches[0].pageY - cvsOffsetCoords.y;
 
@@ -105,7 +103,11 @@ function sampleColourCallback(ev) {
 
     ctx.strokeStyle = `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`;
 
+    alert(ctx.strokeStyle);
+
     cCElem.attr('colour_reg_hsluv', regulariseHSLuv(hsluv.Hsluv.rgbToHsluv(sampledColourReg)).toString());
+    
+
     cCElem.css('background-color', `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`);
 }
 
