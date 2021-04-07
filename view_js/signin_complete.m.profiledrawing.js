@@ -2,13 +2,12 @@ var cvsElem;
 var ctx;
 var hasInitialised = false;
 var isSamplingColour = false;
-var prevTouchX = null;
-var prevTouchY = null;
+
+var pPrevTouch = { x: null, y: null };
+var prevTouch = { x: null, y: null };
 var cvsOffset;
-var cvsOffX;
-var cvsOffY;
-var touchX;
-var touchY;
+var cvsOffsetCoords = {};
+var touchCoords = {};
 
 var scale; // Device pixel ratio
 
@@ -68,34 +67,49 @@ function initialiseProfileDrawingView() {
 
     cvsElem.on('touchstart', (e) => {
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
-        cvsOffX = cvsOffset.x;
-        cvsOffY = cvsOffset.y;
+        cvsOffsetCoords.x = cvsOffset.x;
+        cvsOffsetCoords.y = cvsOffset.y;
 
         if(!isSamplingColour) {
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 15;
+            ctx.lineCap = 'round';
             ctx.strokeStyle = $('.current_colour').css('background-color');
 
             var drawCallback = function(ev) {
                 ev.preventDefault();
 
-                touchX = ev.touches[0].pageX - cvsOffX;
-                touchY = ev.touches[0].pageY - cvsOffY;
+                touchCoords.x = ev.touches[0].pageX - cvsOffsetCoords.x;
+                touchCoords.y = ev.touches[0].pageY - cvsOffsetCoords.y;
+
+                var pPrevTouchExists = pPrevTouch.x != null && pPrevTouch.y != null;
+                var prevTouchExists = prevTouch.x != null & prevTouch.y != null;
                 
-                if(prevTouchX != null && prevTouchY != null) {
+                if(pPrevTouchExists) {
                     ctx.beginPath();
-                    ctx.moveTo(prevTouchX * scale, prevTouchY * scale);
-                    ctx.lineTo(touchX * scale, touchY * scale);
+                    ctx.moveTo(pPrevTouch.x * scale, pPrevTouch.y * scale);
+                    ctx.lineTo(prevTouch.x * scale, prevTouch.y * scale);
+                    ctx.lineTo(touchCoords.x * scale, touchCoords.y * scale);
+                    ctx.stroke();
+                } else if(prevTouchExists) {
+                    ctx.beginPath();
+                    ctx.moveTo(prevTouch.x * scale, prevTouch.y * scale);
+                    ctx.lineTo(touchCoords.x * scale, touchCoords.y * scale);
                     ctx.stroke();
                 }
 
-                prevTouchX = touchX;
-                prevTouchY = touchY;
+                pPrevTouch.x = prevTouch.x;
+                pPrevTouch.y = prevTouch.y;
+
+                prevTouch.x = touchCoords.x;
+                prevTouch.y = touchCoords.y;
             }
 
             $(window).on('touchend', () => {
                 cvsElem.off('touchmove');
-                prevTouchX = null;
-                prevTouchY = null;
+                prevTouch.x = null;
+                prevTouch.y = null;
+                pPrevTouch.x = null;
+                pPrevTouch.y = null;
             });
     
             cvsElem.on('touchmove', drawCallback);
@@ -110,10 +124,10 @@ function initialiseProfileDrawingView() {
             var sampleColourCallback = function(ev) {
                 ev.preventDefault();
 
-                touchX = ev.touches[0].pageX - cvsOffX;
-                touchY = ev.touches[0].pageY - cvsOffY;
+                touchCoords.x = ev.touches[0].pageX - cvsOffsetCoords.x;
+                touchCoords.x = ev.touches[0].pageY - cvsOffsetCoords.y;
 
-                var sampledColour = ctx.getImageData(touchX * scale, touchY * scale, 1, 1).data;
+                var sampledColour = ctx.getImageData(touchCoords.x * scale, touchCoords.y * scale, 1, 1).data;
 
                 ctx.strokeStyle = `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`;
 
