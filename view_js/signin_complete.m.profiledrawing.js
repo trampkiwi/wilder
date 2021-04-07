@@ -70,6 +70,9 @@ function initialiseProfileDrawingView() {
         cvsOffX = cvsOffset.x;
         cvsOffY = cvsOffset.y;
 
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = $('.current_colour').css('background-color');
+
         var drawCallback = function(ev) {
             ev.preventDefault();
 
@@ -81,10 +84,6 @@ function initialiseProfileDrawingView() {
             console.log(`(${touchX}, ${touchY})`);
             
             if(prevTouchX != null && prevTouchY != null) {
-
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = '#000000';
-
                 ctx.beginPath();
                 ctx.moveTo(prevTouchX * scale, prevTouchY * scale);
                 ctx.lineTo(touchX * scale, touchY * scale);
