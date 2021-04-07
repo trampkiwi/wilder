@@ -96,7 +96,7 @@ function sampleColourCallback(ev) {
     touchCoords.y = ev.touches[0].pageY - cvsOffsetCoords.y;
 
     var sampledColour = ctx.getImageData(touchCoords.x * scale, touchCoords.y * scale, 1, 1).data;
-
+    alert('image sampled');
     var sampledColourReg = [];
 
     for(var i = 0; i < 3; i++) { sampledColourReg.push(sampledColour[i] / 255); }
