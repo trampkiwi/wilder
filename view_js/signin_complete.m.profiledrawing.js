@@ -212,7 +212,7 @@ function initialiseProfileDrawingView() {
         cvsOffsetCoords.x = cvsOffset.x;
         cvsOffsetCoords.y = cvsOffset.y;
 
-        alert(cvsOffsetCoords);
+        alert(JSON.stringify(cvsOffsetCoords));
 
         if(isSamplingColour) { // Sampling mode
             cCElem = $('.current_colour');
