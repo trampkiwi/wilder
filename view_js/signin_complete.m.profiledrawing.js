@@ -212,12 +212,15 @@ function initialiseProfileDrawingView() {
             addPastColour(cRegHsl);         
 
             $(window).on('touchend', () => {
+                alert('touch ended!');
                 cvsElem.off('touchmove');
+                cvsElem.off('mousemove');
 
                 deactivateSamplingMode();
             });
 
             cvsElem.on('touchmove', sampleColourCallback);
+            cvsElem.on('mousemove', sampleColourCallback);
             sampleColourCallback(e);
         } else if(isFillMode) { // Fill mode
             // Save current sate in hidden history canvas
