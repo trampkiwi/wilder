@@ -64,6 +64,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
             } else { // User has registered before.
                 // Show page content bar tutorial options
+                $('#username_span').html(firebase.auth().currentUser.displayName);
+
                 $('#registerCompleteContent').css('display', 'block');
             }
             
