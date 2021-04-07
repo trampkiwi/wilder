@@ -78,7 +78,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 $(() => {
-    $('#confirm_signup_complete').on('click', () => {
+    $('#confirm_signup_complete').on('click', async function() {
         var userNameText = $('#user_displayname').val();
         var profilePicURI = $('.profile_pic_display').attr('src');
         var warningText = $('#signup_warning');
