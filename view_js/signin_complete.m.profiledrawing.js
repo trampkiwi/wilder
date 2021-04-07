@@ -59,48 +59,82 @@ function initialiseProfileDrawingView() {
     });
 
     $('.sample_colour').on('click', (e) => {
-        var sampleButton = $(e.target);
-        sampleButton.attr('src', '/Assets/sample_colour_white.png');
-        sampleButton.css('background-color', 'black');
+        $('.sample_colour').css('background-color', 'black');
+        $('.sample_colour .black').css('display', 'none');
+        $('.sample_colour .white').css('display', 'inline-block');
+
+        isSamplingColour = true;
     });
 
     cvsElem.on('touchstart', (e) => {
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
-        console.log(cvsOffset);
         cvsOffX = cvsOffset.x;
         cvsOffY = cvsOffset.y;
 
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = $('.current_colour').css('background-color');
+        if(!isSamplingColour) {
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = $('.current_colour').css('background-color');
 
-        var drawCallback = function(ev) {
-            ev.preventDefault();
+            var drawCallback = function(ev) {
+                ev.preventDefault();
 
-            console.log(cvsOffX);
-            console.log(ev.touches[0].pageX);
+                touchX = ev.touches[0].pageX - cvsOffX;
+                touchY = ev.touches[0].pageY - cvsOffY;
+                
+                if(prevTouchX != null && prevTouchY != null) {
+                    ctx.beginPath();
+                    ctx.moveTo(prevTouchX * scale, prevTouchY * scale);
+                    ctx.lineTo(touchX * scale, touchY * scale);
+                    ctx.stroke();
+                }
 
-            touchX = ev.touches[0].pageX - cvsOffX;
-            touchY = ev.touches[0].pageY - cvsOffY;
-            console.log(`(${touchX}, ${touchY})`);
-            
-            if(prevTouchX != null && prevTouchY != null) {
-                ctx.beginPath();
-                ctx.moveTo(prevTouchX * scale, prevTouchY * scale);
-                ctx.lineTo(touchX * scale, touchY * scale);
-                ctx.stroke();
+                prevTouchX = touchX;
+                prevTouchY = touchY;
             }
 
-            prevTouchX = touchX;
-            prevTouchY = touchY;
+            $(window).on('touchend', () => {
+                cvsElem.off('touchmove');
+                prevTouchX = null;
+                prevTouchY = null;
+            });
+    
+            cvsElem.on('touchmove', drawCallback);
+            drawCallback(e);
+        } else {
+            var cCElem = $('.current_colour');
+            var cRegHsl = cCElem.attr('colour_reg_hsluv').split(',').map((v) => {
+                return parseFloat(v);
+            });
+            addPastColour(cRegHsl);         
+
+            var sampleColourCallback = function(ev) {
+                ev.preventDefault();
+
+                touchX = ev.touches[0].pageX - cvsOffX;
+                touchY = ev.touches[0].pageY - cvsOffY;
+
+                var sampledColour = ctx.getImageData(touchX * scale, touchY * scale, 1, 1).data;
+
+                ctx.strokeStyle = `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`;
+
+                cCElem.attr('colour_reg_hsluv', hsluv.Hsluv.rgbToHsluv(sampledColour));
+                cCElem.css('background-color', `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`);
+            }
+
+            $(window).on('touchend', () => {
+                cvsElem.off('touchmove');
+
+                $('.sample_colour').css('background-color', 'rgba(0, 0, 0, 0)');
+                $('.sample_colour .black').css('display', 'inline-block');
+                $('.sample_colour .white').css('display', 'none');
+
+                isSamplingColour = false;
+            });
+
+            cvsElem.on('touchmove', sampleColourCallback);
+            sampleColourCallback(e);
         }
 
-        $(window).on('touchend', () => {
-            cvsElem.off('touchmove');
-            prevTouchX = null;
-            prevTouchY = null;
-        });
-
-        cvsElem.on('touchmove', drawCallback);
-        drawCallback(e);
+        
     });
 }

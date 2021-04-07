@@ -119,8 +119,6 @@ function addPastColour(regHsl) {
         var clickedRegHsl = $(e.target).attr('colour_reg_hsluv').split(',').map((v) => {
             return parseFloat(v);
         });
-        console.log(cRegHsl);
-        console.log(clickedRegHsl);
 
         if(cRegHsl[0] != clickedRegHsl[0] || cRegHsl[1] != clickedRegHsl[1] || cRegHsl[2] != clickedRegHsl[2]) {
             cCElem.attr('colour_reg_hsluv', clickedRegHsl.toString());
