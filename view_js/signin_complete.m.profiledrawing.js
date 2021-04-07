@@ -209,10 +209,8 @@ function initialiseProfileDrawingView() {
 
     cvsElem.on('touchstart', (e) => {
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
-        cvsOffsetCoords.x = cvsOffset.x;
-        cvsOffsetCoords.y = cvsOffset.y;
-
-        alert(JSON.stringify(cvsOffset));
+        cvsOffsetCoords.x = cvsOffset.top;
+        cvsOffsetCoords.y = cvsOffset.left;
 
         if(isSamplingColour) { // Sampling mode
             cCElem = $('.current_colour');
