@@ -198,6 +198,7 @@ function initialiseProfileDrawingView() {
     });
 
     cvsElem.on('touchstart', (e) => {
+        alert('touch start!');
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
         cvsOffsetCoords.x = cvsOffset.x;
         cvsOffsetCoords.y = cvsOffset.y;

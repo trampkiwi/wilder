@@ -43,8 +43,12 @@ function updateColourView(currentRegHSL) {
 
     if(currentRegHSL[2] > 50) {
         $('#colour_picker .closeNavbar').css('color', 'black');
+        $('.colour_slider').css('border-color', 'black');
+        $('.slider_handle').css('border-color', 'black');
     } else {
         $('#colour_picker .closeNavbar').css('color', 'white');
+        $('.colour_slider').css('border-color', 'white');
+        $('.slider_handle').css('border-color', 'white');
     }
 }
 

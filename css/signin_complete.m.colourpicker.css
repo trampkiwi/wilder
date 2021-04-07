@@ -25,4 +25,5 @@
 
 #colour_picker {
     z-index: 5;
+    overflow-x: hidden;
 }
