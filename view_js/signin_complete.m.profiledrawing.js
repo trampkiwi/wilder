@@ -82,7 +82,7 @@ function drawCallback(ev) {
         ctx.stroke();
     }*/
 
-    alert(`${pPrevTouchExists}, ${prevTouchExists}, ${prevTouch.x * scale}, ${prevTouch.y * scale}, ${touchCoords.x * scale}, ${touchCoords.y * scale}`);
+    //alert(`${pPrevTouchExists}, ${prevTouchExists}, ${prevTouch.x * scale}, ${prevTouch.y * scale}, ${touchCoords.x * scale}, ${touchCoords.y * scale}`);
 
     ctx.beginPath();
     ctx.moveTo(0, 0);
@@ -211,6 +211,8 @@ function initialiseProfileDrawingView() {
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
         cvsOffsetCoords.x = cvsOffset.x;
         cvsOffsetCoords.y = cvsOffset.y;
+
+        alert(cvsOffsetCoords);
 
         if(isSamplingColour) { // Sampling mode
             cCElem = $('.current_colour');
