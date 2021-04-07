@@ -29,6 +29,32 @@
             .tutorial_content {
                 display: none;
             }
+
+            .profile_pic_display {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .profile_container {
+                display: inline-block;
+                padding: 1rem;
+                padding-top: 5rem;
+                margin-top: 1rem;
+                position: relative;
+                width: 14rem;
+                height: 14rem;
+                font-size: 1.2em;
+                border: 2px dotted var(--hr-and-line-col);
+            }
+
+            #user_displayname {
+                width: 14rem;
+                font-size: 1.6em;
+                margin-top: 1em;
+            }
         </style>
 
         <link rel="stylesheet" href="/css/signin_complete.m.colourpicker.css">
@@ -81,14 +107,16 @@
             <h1 style="font-size: 1.6em;">Complete signing up</h1>
             <hr>
             <p>
-                To complete signing up, please set up your profile picture and type in your nickname.
+                To complete signing up, please set up your profile picture and type in a name you want to use on Wilder.
             </p>
             <hr>
 
             <div class="profile_container">
-                Click to begin drawing profile picture
+                Click here to draw your profile picture!
                 <img class="profile_pic_display">
             </div>
+
+            <input type="text" id="user_displayname" class="handwriting" placeholder="Kiwi the great explorer">
         </div>
 
         <!-- Drawing modal -->

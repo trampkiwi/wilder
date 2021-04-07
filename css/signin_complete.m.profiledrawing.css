@@ -1,24 +1,5 @@
 /* ---------- profile pic rel. --------- */
 
-.profile_pic_display {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.profile_container {
-    display: inline-block;
-    padding: 1rem;
-    padding-top: 4rem;
-    margin-top: 1rem;
-    position: relative;
-    width: 13rem;
-    height: 13rem;
-    font-size: 1.2em;
-}
-
 #drawing_canvas {
     display: none;
     border: 2px dotted var(--hr-and-line-col);
@@ -107,7 +88,7 @@
 
 #drawing_view .lower .current_colour {
     width: 4rem;
-    border-right: 2px dotted var(--hr-and-line-col);
+    border: 4px solid var(--hr-and-line-col);
 }
 
 #drawing_view .lower .past_colour {
