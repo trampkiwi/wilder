@@ -194,8 +194,8 @@ function initialiseProfileDrawingView() {
             deactivateBrushSize(elem);
         });
 
-        activateBrushSize(e.target);
-    })
+        activateBrushSize(e.currentTarget);
+    });
 
     cvsElem.on('touchstart', (e) => {
         cvsOffset = cvsElem.get(0).getBoundingClientRect();
