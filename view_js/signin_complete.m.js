@@ -88,16 +88,44 @@ $(() => {
         } else if(userNameText == '') {
             warningText.html('Please check if you have put in your user name.');
         } else {
+            warningText.html('');
+
             var db = firebase.database();
 
-            var user = firebase.auth().currentUser;
+            var currentUser = firebase.auth().currentUser;
 
-            console.log(user);
+            console.log(currentUser);
+
+            // First attempt to upload profile image
+
+            var profilePicPath = `public_content/${currentUser.uid}/profilePic.jpg`;
 
             var storageRef = firebase.storage().ref();
-            var profilePicRef = storageRef.child(`public_content/${user.uid}/profilePic.jpg`);
+            var profilePicRef = storageRef.child(profilePicPath);
 
-            console.log($('.profile_pic_display').attr('src'));
+            try {
+                // Attempt to put the image file to firebase storage
+                await profilePicRef.putString(profilePicURI, 'data_url');
+
+                var now = Date.now();
+
+                // Attempt to create the user profile in realtime database
+                await db.ref(`users/${currentUser.uid}`).set({
+                    created: now,
+                    last_modified: now,
+                    profile_picture_storage_ref: profilePicPath
+                });
+
+                // Attempt to update user information
+                await currentUser.updateProfile({ displayName: userNameText });
+
+                // Reload the page to show signin complete page.
+                location.reload();
+            } catch (error) {
+                warningText.html(error.message);
+
+                throw error;
+            }
         }        
     });
 });

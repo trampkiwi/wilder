@@ -17,6 +17,10 @@ firebase.auth().onAuthStateChanged((user) => {
         }).catch((err) => { // If error occurs
             if(err.code == 'PERMISSION_DENIED') { // Current login is invalid.
                 window.location.replace('/invalid_user.m.html'); // Redirect to invalid user page.
+            } else {
+                alert(err);
+                
+                throw err;
             }
         });
     } else { // User not logged in
