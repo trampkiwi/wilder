@@ -68,8 +68,6 @@ function drawCallback(ev) {
 
     var pPrevTouchExists = pPrevTouch.x != null && pPrevTouch.y != null;
     var prevTouchExists = prevTouch.x != null & prevTouch.y != null;
-
-    alert('checkpoint 1!');
     
     if(pPrevTouchExists) {
         ctx.beginPath();
@@ -83,8 +81,6 @@ function drawCallback(ev) {
         ctx.lineTo(touchCoords.x * scale, touchCoords.y * scale);
         ctx.stroke();
     }
-
-    alert('checkpoint 2!');
 
     pPrevTouch.x = prevTouch.x;
     pPrevTouch.y = prevTouch.y;
@@ -249,8 +245,6 @@ function initialiseProfileDrawingView() {
             // Canvas init
 
             ctx.strokeStyle = $('.current_colour').css('background-color');
-
-            alert(ctx.strokeStyle);
 
             $(window).on('touchend', () => {
                 cvsElem.off('touchmove');
