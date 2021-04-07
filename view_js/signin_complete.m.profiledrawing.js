@@ -58,11 +58,19 @@ function initialiseProfileDrawingView() {
     });
 
     $('.sample_colour').on('click', (e) => {
-        $('.sample_colour').css('background-color', 'black');
-        $('.sample_colour .black').css('display', 'none');
-        $('.sample_colour .white').css('display', 'inline-block');
+        if(!isSamplingColour) { // If view is not currently in sampling mode
+            $('.sample_colour').css('background-color', 'black');
+            $('.sample_colour .black').css('display', 'none');
+            $('.sample_colour .white').css('display', 'inline-block');
 
-        isSamplingColour = true;
+            isSamplingColour = true;
+        } else {
+            $('.sample_colour').css('background-color', 'rgba(0, 0, 0, 0)');
+            $('.sample_colour .black').css('display', 'inline-block');
+            $('.sample_colour .white').css('display', 'none');
+
+            isSamplingColour = false;
+        }
     });
 
     cvsElem.on('touchstart', (e) => {
@@ -72,6 +80,7 @@ function initialiseProfileDrawingView() {
 
         if(!isSamplingColour) {
             ctx.lineWidth = 15;
+            ctx.lineJoin = 'round';
             ctx.lineCap = 'round';
             ctx.strokeStyle = $('.current_colour').css('background-color');
 
@@ -125,13 +134,20 @@ function initialiseProfileDrawingView() {
                 ev.preventDefault();
 
                 touchCoords.x = ev.touches[0].pageX - cvsOffsetCoords.x;
-                touchCoords.x = ev.touches[0].pageY - cvsOffsetCoords.y;
+                touchCoords.y = ev.touches[0].pageY - cvsOffsetCoords.y;
 
                 var sampledColour = ctx.getImageData(touchCoords.x * scale, touchCoords.y * scale, 1, 1).data;
 
+                var sampledColourReg = [];
+
+                for(var i = 0; i < 3; i++) { sampledColourReg.push(sampledColour[i] / 255); }
+
+                console.log(sampledColour);
+                console.log(sampledColourReg);
+
                 ctx.strokeStyle = `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`;
 
-                cCElem.attr('colour_reg_hsluv', hsluv.Hsluv.rgbToHsluv(sampledColour));
+                cCElem.attr('colour_reg_hsluv', regulariseHSLuv(hsluv.Hsluv.rgbToHsluv(sampledColourReg)).toString());
                 cCElem.css('background-color', `rgb(${sampledColour[0]}, ${sampledColour[1]}, ${sampledColour[2]})`);
             }
 
