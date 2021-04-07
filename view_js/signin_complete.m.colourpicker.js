@@ -145,6 +145,10 @@ function initialiseColourPicker() {
             modalView.openModal($('#colour_picker'), $('#colour_picker_veil'), '70%');
 
             initialiseColourView($(ev.target));
+
+            $('#colour_picker .closeNavbar').on('click', colourPickerClosed);
+
+            $('#colour_picker_veil').on('click', colourPickerClosed);
         });
     });
 
@@ -157,10 +161,9 @@ function initialiseColourPicker() {
             addPastColour(prevRegHSLuv);
         }
 
+        $('#colour_picker .closeNavbar').off('click');
+        $('#colour_picker_veil').off('click');
+
         modalView.closeModal($('#colour_picker'), $('#colour_picker_veil'));
     };
-
-    $('#colour_picker .closeNavbar').on('click', colourPickerClosed);
-
-    $('#colour_picker_veil').on('click', colourPickerClosed);
 }
