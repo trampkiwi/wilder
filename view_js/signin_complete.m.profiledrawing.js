@@ -92,7 +92,7 @@ function drawCallback(ev) {
 function sampleColourCallback(ev) {
     ev.preventDefault();
 
-    $('#drawing_view .header').css('background-color', `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
+    $('#drawing_view .header').css('background-color', `rgb(${ev.touches[0].pageX}, ${ev.touches[0].pageY}, 127)`);
 
     touchCoords.x = ev.touches[0].pageX - cvsOffsetCoords.x;
     touchCoords.y = ev.touches[0].pageY - cvsOffsetCoords.y;
@@ -212,15 +212,12 @@ function initialiseProfileDrawingView() {
             addPastColour(cRegHsl);         
 
             $(window).on('touchend', () => {
-                alert('touch ended!');
                 cvsElem.off('touchmove');
-                cvsElem.off('mousemove');
 
                 deactivateSamplingMode();
             });
 
             cvsElem.on('touchmove', sampleColourCallback);
-            cvsElem.on('mousemove', sampleColourCallback);
             sampleColourCallback(e);
         } else if(isFillMode) { // Fill mode
             // Save current sate in hidden history canvas
