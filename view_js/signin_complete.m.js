@@ -49,7 +49,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         var db = firebase.database();
 
-        var uid = firebase.auth().currentUser.uid;
+        var currentUser = firebase.auth().currentUser;
+
+        var uid = currentUser.uid;
 
         db.ref('/users/' + uid).once('value').then((snapShot) => { // User is approved.
 
@@ -64,7 +66,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
             } else { // User has registered before.
                 // Show page content bar tutorial options
-                $('#username_span').html(firebase.auth().currentUser.displayName);
+                $('#username_span').html(currentUser.displayName);
+                $('#user_profpic_mini').attr('src', currentUser.photoURL);
 
                 $('#registerCompleteContent').css('display', 'block');
             }
@@ -118,8 +121,7 @@ $(() => {
                 // Attempt to create the user profile in realtime database
                 await db.ref(`users/${currentUser.uid}`).set({
                     created: now,
-                    last_modified: now,
-                    profile_pic_url: staticProfPicURL
+                    last_modified: now
                 });
 
                 // Attempt to update user information
