@@ -98,8 +98,6 @@ $(() => {
 
             var currentUser = firebase.auth().currentUser;
 
-            console.log(currentUser);
-
             // First attempt to upload profile image
 
             var profilePicPath = `public_content/${currentUser.uid}/profilePic.jpg`;
@@ -113,19 +111,17 @@ $(() => {
 
                 var staticProfPicURL = await profilePicRef.getDownloadURL();
 
-                console.log(staticProfPicURL);
-
                 var now = Date.now();
 
                 // Attempt to create the user profile in realtime database
                 await db.ref(`users/${currentUser.uid}`).set({
                     created: now,
                     last_modified: now,
-                    profile_picture_storage_ref: profilePicPath
+                    profile_pic_url: staticProfPicURL
                 });
 
                 // Attempt to update user information
-                await currentUser.updateProfile({ displayName: userNameText });
+                await currentUser.updateProfile({ displayName: userNameText, photoURL: staticProfPicURL });
 
                 // Reload the page to show signin complete page.
                 location.reload();
