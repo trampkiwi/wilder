@@ -89,8 +89,10 @@ $(() => {
 
         if(typeof profilePicURI == 'undefined') {
             warningText.html('Please check if you have set your profile picture.');
+            $('#confirm_signup_complete').css('visibility', 'visible');
         } else if(userNameText == '') {
             warningText.html('Please check if you have put in your user name.');
+            $('#confirm_signup_complete').css('visibility', 'visible');
         } else {
             warningText.html('');
 
@@ -133,7 +135,5 @@ $(() => {
                 throw error;
             }
         }        
-
-        $('#confirm_signup_complete').css('visibility', 'visible');
     });
 });
