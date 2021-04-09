@@ -36,14 +36,14 @@ function deactivateSamplingMode() {
 
 function activateFillMode() {
     $('.flood_fill').css('background-color', 'rgb(22, 22, 22)');
-    $('.flood_fill').attr('css', '/Assets/flood_fill_white.png');
+    $('.flood_fill').attr('src', '/Assets/flood_fill_white.png');
 
     isFillMode = true;
 }
 
 function deactivateFillMode() {
     $('.flood_fill').css('background-color', 'rgba(0, 0, 0, 0)');
-    $('.flood_fill').attr('css', '/Assets/flood_fill.png');
+    $('.flood_fill').attr('src', '/Assets/flood_fill.png');
 
     isFillMode = false;
 }
