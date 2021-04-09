@@ -65,7 +65,6 @@ firebase.auth().onAuthStateChanged(function(user) {
                 initialiseProfileSetup();
 
             } else { // User has registered before.
-                // Show page content bar tutorial options
                 $('#username_span').html(currentUser.displayName);
                 $('#user_profpic_mini').attr('src', currentUser.photoURL);
 
@@ -126,6 +125,8 @@ $(() => {
 
                 // Attempt to update user information
                 await currentUser.updateProfile({ displayName: userNameText, photoURL: staticProfPicURL });
+
+                window.sessionStorage.setItem('isUserNew', 'true'); // Flag user as new: later used in explore.m.html etc.
 
                 // Reload the page to show signin complete page.
                 location.reload();
