@@ -296,11 +296,15 @@ function initialisePage() {
     // -------------- Menu button functionality ---------------
 
     $('#menubutton').on('click', function() {
-        $('.navBar').css('height', '70%');
+        modalView.openModal($('#menu_bar'), $('#veil'), '70%');
     });
 
-    $('#closemenu').on('click', function() {
-        $('.navBar').css('height', '0');
+    $('.closeNavbar').on('click', function() {
+        modalView.closeModal($('#menu_bar'), $('#veil'));
+    });
+
+    $('#veil').on('click', function() {
+        modalView.closeModal($('#menu_bar'), $('#veil'));
     });
 }
 

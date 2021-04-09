@@ -33,21 +33,23 @@
             }
 
             .control_button {
-                width: 3rem;
-                height: 3rem;
+                width: 5rem;
+                height: 5rem;
 
                 border-radius: 10%;
                 border: 2px solid var(--hr-and-line-col);
             }
 
-            #menubutton, #closemenu {
+            #addbutton {
                 position: absolute;
-                left: 10px;
+                left: 50%;
                 bottom: 10px;
+
+                margin-left: -2.5rem;
+
                 z-index: 1;
-                background-color: rgba(255, 255, 255, 0.7);
+                background-color: rgb(255, 255, 255);
                 border: 2px solid var(--hr-and-line-col);
-                border-
             }
 
             #mapdiv {
@@ -55,8 +57,6 @@
                 width: 100%;
                 z-index: 0;
             }
-
-            
         </style>
 
         <!-- Google Firebase config -->
@@ -67,9 +67,7 @@
         <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
         <script src="/func_js/firebase-init.js"></script>
 
-        <!-- Check if user is valid and redirect to invalid user page if not -->
-        <!-- integrated into explore.m.js -->
-        <!-- <script src="/func_js/validate_user.js"></script> -->
+        <script src="/func_js/modalview.js"></script>
 
         <!-- JS import -->
         
@@ -78,13 +76,20 @@
     </head>
     <body>
         <div class="all_content" style="display: none;">
-            <div class="navBar">
-                Heylo
-                <a id="closemenu" class="navlink" href="#">Close menu</a>
-            </div>
             <div id="main">
                 <div id="mapdiv"></div>
-                <input id="menubutton" class="control_button" type="image" src="/Assets/menu.png">
+                <input id="addbutton" class="control_button" type="image" src="/Assets/add.png">
+            </div>
+        </div>
+
+        <div class="veil" id="veil"></div>
+        <div class="navBar" id="menu_bar">
+            <a href="#" class="closeNavbar">X</a>
+            <div class="header">
+                <h1>Menu</h1>
+            </div>
+            <div class="content">
+                <a href="#" class="navlink">Go back to front page</a><br>
             </div>
         </div>
     </body>
