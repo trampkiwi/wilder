@@ -1,3 +1,14 @@
+var map;
+var observations = []; // Same format as in the realtime database
+var observationMarkers = []; // Array of L.markers
+var interactions = []; // Same format as in the realtime database
+var interactionMarkers = []; // Array of L.markers
+
+var observationLoadCallbackID;
+var interactionLoadCallbackID;
+
+var firebaseDB;
+
 // ----------- Lerp util --------
 
 function lerp(xa, ya, xb, yb, x) { // Linearly interpolating function (xa < xb)
@@ -43,73 +54,124 @@ function calcMarkerDiam(val, currentZoomLevel, options) {
     return diam; // The magic of a double lerp...
 }
 
+// ---------------- For calculatig geohash from Leaflet Latlng object ------------
 /*
-    To save the number of read requests that are made, server side read request will only be fired
-    if the new map region contains areas that have not been cached before.
-    This requires there to be an array that stores the regions that have been cached.
-    The code will use exploreCache.rects to store this.
-    To ensure good performance, exploreCache.rects will be capped in terms of length.
-    Each rect will be in the following form:
-
-    [
-        minLat, minLong, maxLat, maxLong,
-        lastUpdated
-    ]
-
-    Of which lastUpdated is the UNIX timestamp when the rect was last updated by data from the server.
-
-    This does mean that, if the user navigates the world using the map a lot,
-    there will still be a considerable number of requests that are made.
-
-    For small scale data, loading the whole dataset and then doing client side work to render everything properly
-    requires less read requests in total.
-    However, for large scale data, it might not be practical to load the whole data everytime the user loads the page,
-    so this method is more suitable.
-    This method is adopted to ensure future scalability.
-    
-    The mapview display will only use data from cache.
-
-    When the page is reloaded, the page will attempt to retrieve the exploreCache stored in the sessionStorage.
-    If it is able to retrieve the object, it will check through all the rects
+    Geohashing rule:
+        E
+    2   3 N
+    0   1
 */
 
-// ----------- Attempt to enable offline persistence for caching ----------
+function latlngToGeohash(latlng, prec) {
+    var uLat = latlng.lat + 90;
+    var uLong = latlng.lng + 180;
 
-/*var firestoreDB = firebase.firestore();
+    var geohash = '';
 
-// ----------- Declare/retreive storage array ----------
+    var latGrad, longGrad, latI, longI;
 
-var exploreCache = {};
+    for(var i = 1; i < prec+1; i++) {
+        latGrad = 180 / (1 << i); // latitude graduation for the precision level
+        longGrad = 360 / (1 << i); // for longitude
+        
+        latI = Math.min(Math.floor(uLat / latGrad), 1); // min to account for edge cases.
+        longI = Math.min(Math.floor(uLong / longGrad), 1);
 
-var importedExploreCache = window.sessionStorage.getItem('exploreCache'); // Attempt to retrieve exploreCache
+        geohash = geohash + (latI * 2 + longI).toString();
 
-if(importedExploreCache != null) { // If previous cache exists
-    exploreCache = JSON.parse(importedExploreCache);
+        uLat = uLat - latI * latGrad;
+        uLong = uLong - longI * longGrad;
+    }
+
+    return geohash;
 }
 
-// ---------- sessionStorage storing logic ----------
+function latlngToGeohashSingle(latlng, prec) { // Returns geohash number at exactly the given precision.
+    var uLat = latlng.lat + 90;
+    var uLong = latlng.lng + 180;
 
-window.addEventListener('pagehide', (event) => { // When the user's session is suspended
-    window.sessionStorage.setItem('exploreCache', JSON.stringify(exploreCache)); // Attempt to store data in sessionStorage
-});
+    var geohash = '';
 
-// ----------- 'Smart' data retriever ------------
+    var latGrad, longGrad, latI, longI;
 
-function 
+    latGrad = 180 / (1 << prec); // latitude graduation for the precision level
+    longGrad = 360 / (1 << prec); // for longitude
 
+    uLat = uLat % (latGrad * 2);
+    uLong = uLong % (longGrad * 2);
+        
+    latI = Math.min(Math.floor(uLat / latGrad), 1); // min to account for edge cases.
+    longI = Math.min(Math.floor(uLong / longGrad), 1);
 
+    geohash = geohash + (latI * 2 + longI).toString();
 
-*/
+    uLat = uLat - latI * latGrad;
+    uLong = uLong - longI * longGrad;
 
-$(function(){
+    return geohash;
+}
+
+// -------------- Find geohashes of the given precision that overlaps with the latlngBounds object ----------
+
+function findOverlappingGeoTiles(latlngBounds, prec) {
+    var uWest = latlngBounds.getWest() + 180;
+    var uEast = latlngBounds.getEast() + 180;
+    var uNorth = latlngBounds.getNorth() + 90;
+    var uSouth = latlngBounds.getSouth() + 90;
+
+    var latGrad = 180 / (1 << prec);
+    var longGrad = 360 / (1 << prec);
+
+    var samplingLats = Array(
+        Math.floor(uNorth / latGrad) - Math.floor(uSouth / latGrad) + 1 // The number of columns of tiles
+    ).fill(0).map((_, i) => {
+        return (Math.floor(uSouth / latGrad) + i + 0.5) * latGrad - 90;
+    });
+    var samplingLngs = Array(
+        Math.floor(uEast / longGrad) - Math.floor(uWest / longGrad) + 1 // The number of columns of tiles
+    ).fill(0).map((_, i) => {
+        return (Math.floor(uWest / longGrad) + i + 0.5) * longGrad - 180;
+    });
+
+    console.log(samplingLats, samplingLngs);
+
+    var geohashes = [];
+
+    for(var latI = 0; latI < samplingLats.length; latI++) {
+        for(var longI = 0; longI < samplingLngs.length; longI++) {
+            geohashes.push(latlngToGeohash({
+                lat: samplingLats[latI],
+                lng: samplingLngs[longI]
+            }, prec));
+        }
+    }
+
+    return geohashes;
+}
+
+// ----------------- Init -----------------
+
+function loadObservations() { // Called when user stays at some position for 1.5 seconds
+    /*console.log('loading observations...');
+
+    var precLevel = map.getZoom() - 1;
+
+    var geohashes = findOverlappingGeoTiles(map.getBounds(), precLevel); // Find geohashes to load data from
+
+    geohashes.forEach((geohash, i) => {
+        firebaseDB.ref('observation_from_')
+    });*/
+}
+
+function initialiseMap() {
     // -------------- Initialise map ----------------
     
-    var map = L.map('mapdiv', {
+    map = L.map('mapdiv', {
         zoomControl: false
     }).setView([51.505, -0.09], 15);
 
     L.control.zoom({
-        position: 'bottomright'
+        position: 'topright'
     }).addTo(map);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{username}/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -123,9 +185,44 @@ $(function(){
         accessToken: 'pk.eyJ1Ijoic3RhcndhdGNoZXJraXdpIiwiYSI6ImNrbXY0ODVkMjAxa2Myb205ZTFxeDVweHEifQ.fwIZz2Ljwvpv3dGH7Elp9g'
     }).addTo(map);
 
+    map.on('zoomend', () => {
+        clearTimeout(observationLoadCallbackID);
+        
+        var currentZoom = map.getZoom();
+
+        console.log(currentZoom);
+
+        // TODO: loading feedback for user
+
+        observationLoadCallbackID = setTimeout(loadObservations, 1500);
+
+        var markerResizeFromZoom = (marker) => {
+            var diam = calcMarkerDiam(marker.prop.weight, currentZoom);
+            var icon = marker.getIcon();
+            icon.options.iconSize = [diam, diam];
+            marker.setIcon(icon);
+        };
+        
+        observationMarkers.forEach(markerResizeFromZoom);
+        interactionMarkers.forEach(markerResizeFromZoom);
+    });
+
+    map.on('moveend', () => {
+        clearTimeout(observationLoadCallbackID);
+
+        console.log('move ended!');
+
+        observationLoadCallbackID = setTimeout(loadObservations, 1500);
+    });
+}
+
+function initialisePage() {
+    $('.all_content').css('display', 'block');
+
+    initialiseMap();
+
     // -------------- Marker Diam Calc test markers ---------------
 
-    var markers = [];
     for(var i = 0; i < 7; i++) {
         var lat = 51.573646 + 0.005 * i;
         var long = -0.032916;
@@ -147,20 +244,8 @@ $(function(){
 
         marker.addTo(map);
 
-        markers.push(marker);
+        observationMarkers.push(marker);
     }
-
-    map.on('zoomend', () => {
-        var currentZoom = map.getZoom();
-        //console.log(currentZoom);
-        
-        markers.forEach((marker) => {
-            var diam = calcMarkerDiam(marker.prop.weight, currentZoom);
-            var icon = marker.getIcon();
-            icon.options.iconSize = [diam, diam];
-            marker.setIcon(icon);
-        });
-    })
 
     // ----------------- Locate user -------------------
 
@@ -217,4 +302,43 @@ $(function(){
     $('#closemenu').on('click', function() {
         $('.navBar').css('height', '0');
     });
+}
+
+$(async function(){
+    // -------------- Check user ---------------
+
+    /*firebase.auth().onAuthStateChanged((user) => {
+        if(user) { // User logged in
+            var db = firebase.database();
+    
+            var uid = firebase.auth().currentUser.uid;
+    
+            db.ref('/users/' + uid).once('value').then((snapShot) => { // User is authorised.
+                var dat = snapShot.val();
+                
+                if(dat == null) { // User has not registered before.
+                    window.location.replace('/signin_complete.m.html'); // Redirect to signup complete page.
+                } else { // User has registered before.
+                    initialiseMap();
+                }
+            }).catch((err) => { // If error occurs
+                if(err.code == 'PERMISSION_DENIED') { // Current login is invalid.
+                    window.location.replace('/invalid_user.m.html'); // Redirect to invalid user page.
+                } else {
+                    alert(err);
+                    
+                    throw err;
+                }
+            });
+        } else { // User not logged in
+            window.location.replace('/');
+        }
+    });*/
+
+    // TODO: put initialiseMap() back into the authstate check code.
+
+    firebaseDB = firebase.database();
+
+    initialisePage();
+    
 });
