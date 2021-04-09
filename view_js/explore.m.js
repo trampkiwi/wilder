@@ -6,13 +6,14 @@ async function initialise() { // called after elements have loaded and firebase 
     $('.all_content').css('display', 'block');
 
     // Set profile button image.
-    $('#profilebutton').attr('src', firebase.auth().currentUser.photoURL);
+    //$('#profilebutton').attr('src', firebase.auth().currentUser.photoURL);
 
     initialiseMap();
 }
 
 // -------------- Check user ---------------
 
+/*
 firebase.auth().onAuthStateChanged((user) => {
     if(user) { // User logged in
         var db = firebase.database();
@@ -39,4 +40,6 @@ firebase.auth().onAuthStateChanged((user) => {
     } else { // User not logged in
         window.location.replace('/');
     }
-});
+});*/
+
+$(initialise);

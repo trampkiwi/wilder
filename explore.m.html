@@ -33,12 +33,12 @@
             }
 
             .control_button {
-                display: block;
+                display: inline-block;
 
                 width: 3rem;
                 height: 3rem;
 
-                border-radius: 10%;
+                border-radius: 7px;
                 border: 2px solid var(--hr-and-line-col);
                 background-color: rgb(255, 255, 255);
 
@@ -56,15 +56,75 @@
                 margin-left: -2rem;
             }
 
-            #paulbutton {
+            .paulcontainer {
+                display: flex;
+                flex-flow: row;
+                height: 3rem;
+
                 margin-bottom: 10px;
             }
 
-            .topleft {
+            #paulbutton {
+                margin-right: 20px;
+            }
+
+            #pauldialogue {
+                /*flex-grow: 1;*/
+
+                background-color: white;
+
+                border: 2px solid var(--hr-and-line-col);
+
+                font-size: 1.2rem;
+
+                padding: 5px;
+
+                display: inline-block;
+                position: relative;
+
+                height: -webkit-fit-content;
+                height: -moz-fit-content;
+                height: fit-content;
+
+                width: -webkit-fit-content;
+                width: -moz-fit-content;
+                width: fit-content;
+
+                border-radius: 7px;
+            }
+
+            #pauldialogue:before {
+                content: "";
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                left: -20px;
+                top: 4px;
+                border-left: 10px solid transparent;
+                border-right: 10px solid var(--hr-and-line-col);
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+            }
+
+            #pauldialogue:after {
+                content: "";
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                left: -17px;
+                top: 4px;
+                border-left: 10px solid transparent;
+                border-right: 10px solid white;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+            }
+
+            .top {
                 position: absolute;
                 top: 0;
                 left: 0;
                 padding: 10px;
+                width: 100%;
             }
 
             #mapdiv {
@@ -93,8 +153,13 @@
             <div id="main">
                 <div id="mapdiv"></div>
 
-                <div class="topleft">
-                    <input id="paulbutton" class="control_button" type="image">
+                <div class="top">
+                    <div class="paulcontainer">
+                        <input id="paulbutton" class="control_button" type="image">
+                        <div id="pauldialogue" class="handwriting">
+                            How are you going?
+                        </div>
+                    </div>
                     <input id="profilebutton" class="control_button" type="image">
                 </div>
 
