@@ -22,32 +22,28 @@ var scale; // Device pixel ratio
 
 function activateSamplingMode() {
     $('.sample_colour').css('background-color', 'rgb(22, 22, 22)');
-    $('.sample_colour .black').css('display', 'none');
-    $('.sample_colour .white').css('display', 'inline-block');
+    $('.sample_colour').attr('src', '/Assets/sample_colour_white.png');
 
     isSamplingColour = true;
 }
 
 function deactivateSamplingMode() {
     $('.sample_colour').css('background-color', 'rgba(0, 0, 0, 0)');
-    $('.sample_colour .black').css('display', 'inline-block');
-    $('.sample_colour .white').css('display', 'none');
+    $('.sample_colour').attr('src', '/Assets/sample_colour_black.png');
 
     isSamplingColour = false;
 }
 
 function activateFillMode() {
     $('.flood_fill').css('background-color', 'rgb(22, 22, 22)');
-    $('.flood_fill .black').css('display', 'none');
-    $('.flood_fill .white').css('display', 'inline-block');
+    $('.flood_fill').attr('css', '/Assets/flood_fill_white.png');
 
     isFillMode = true;
 }
 
 function deactivateFillMode() {
     $('.flood_fill').css('background-color', 'rgba(0, 0, 0, 0)');
-    $('.flood_fill .black').css('display', 'inline-block');
-    $('.flood_fill .white').css('display', 'none');
+    $('.flood_fill').attr('css', '/Assets/flood_fill.png');
 
     isFillMode = false;
 }

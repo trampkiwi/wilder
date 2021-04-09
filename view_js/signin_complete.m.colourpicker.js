@@ -104,7 +104,7 @@ function initialiseColourView(barElem) {
 
 function addPastColour(regHsl) {
     $('.current_colour').after(`
-        <div class="past_colour" colour_reg_hsluv="${regHsl.toString()}"
+        <input type="button" class="past_colour" colour_reg_hsluv="${regHsl.toString()}"
             style="background-color: ${hsluv.Hsluv.hsluvToHex(recoverHSLuv(regHsl))}"></div>
     `);
 
