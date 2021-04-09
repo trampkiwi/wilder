@@ -25,11 +25,11 @@
     height: 4rem;
 }
 
-#drawing_view .upper div, #drawing_view .lower div {
+#drawing_view .upper input, #drawing_view .lower input {
     touch-action: manipulation;
 }
 
-#drawing_view div {
+#drawing_view input {
     display: inline-block;
 }
 
