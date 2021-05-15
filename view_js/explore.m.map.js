@@ -150,9 +150,9 @@ function findOverlappingGeoTiles(latlngBounds, prec) {
 // ----------------- Init -----------------
 
 function loadObservations() { // Called when user stays at some position for 1.5 seconds
-    /*console.log('loading observations...');
+    //console.log('loading observations...');
 
-    var precLevel = map.getZoom() - 1;
+    /*var precLevel = map.getZoom() - 1;
 
     var geohashes = findOverlappingGeoTiles(map.getBounds(), precLevel); // Find geohashes to load data from
 

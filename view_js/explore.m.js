@@ -13,7 +13,6 @@ async function initialise() { // called after elements have loaded and firebase 
 
 // -------------- Check user ---------------
 
-/*
 firebase.auth().onAuthStateChanged((user) => {
     if(user) { // User logged in
         var db = firebase.database();
@@ -40,6 +39,6 @@ firebase.auth().onAuthStateChanged((user) => {
     } else { // User not logged in
         window.location.replace('/');
     }
-});*/
+});
 
 $(initialise);
