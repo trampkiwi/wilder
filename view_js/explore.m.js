@@ -6,7 +6,7 @@ async function initialise() { // called after elements have loaded and firebase 
     $('.all_content').css('display', 'block');
 
     // Set profile button image.
-    //$('#profilebutton').attr('src', firebase.auth().currentUser.photoURL);
+    $('#profilebutton').attr('src', firebase.auth().currentUser.photoURL);
 
     initialiseMap();
 }
