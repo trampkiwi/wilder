@@ -163,6 +163,7 @@ function loadObservations() { // Called when user stays at some position for 1.5
 
 function initialiseMap() {
     // -------------- Initialise map ----------------
+    console.log('initialising...');
     
     map = L.map('mapdiv', {
         zoomControl: false
