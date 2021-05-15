@@ -1,8 +1,6 @@
 var firebaseDB;
 
 async function initialise() { // called after elements have loaded and firebase user has been recognised
-    firebaseDB = firebase.database();
-
     $('.all_content').css('display', 'block');
 
     // Set profile button image.
@@ -15,11 +13,11 @@ async function initialise() { // called after elements have loaded and firebase 
 
 firebase.auth().onAuthStateChanged((user) => {
     if(user) { // User logged in
-        var db = firebase.database();
+        var firebaseDB = firebase.database();
 
         var uid = firebase.auth().currentUser.uid;
 
-        db.ref('/users/' + uid).once('value').then((snapShot) => { // User is authorised.
+        firebaseDB.ref('/users/' + uid).once('value').then((snapShot) => { // User is authorised.
             var dat = snapShot.val();
             
             if(dat == null) { // User has not registered before.
