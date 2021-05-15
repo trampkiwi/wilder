@@ -6,6 +6,15 @@ async function initialise() { // called after elements have loaded and firebase 
     // Set profile button image.
     $('#profilebutton').attr('src', firebase.auth().currentUser.photoURL);
 
+    // Link up buttons to modal.
+    $('#addbutton').on('click', () => {
+        modalView.openModal($('#addModal'), $('#veil'));
+    })
+
+    $('#closeaddmenu').on('click', () => {
+        modalView.closeModal($('#addModal'), $('#veil'));
+    })
+
     initialiseMap();
 }
 
