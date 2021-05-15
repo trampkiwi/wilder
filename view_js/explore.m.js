@@ -40,5 +40,3 @@ firebase.auth().onAuthStateChanged((user) => {
         window.location.replace('/');
     }
 });
-
-$(initialise);
