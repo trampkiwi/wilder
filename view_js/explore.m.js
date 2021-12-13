@@ -8,7 +8,7 @@ async function initialise() { // called after elements have loaded and firebase 
 
     // Link up buttons to modal.
     $('#addbutton').on('click', () => {
-        modalView.openModal($('#addModal'), $('#veil'), '70%');
+        modalView.openModal($('#addModal'), $('#veil'), '8rem');
     });
     
     $('#veil').on('click', () => {
