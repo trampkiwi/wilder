@@ -4,23 +4,35 @@ async function initialise() { // called after elements have loaded and firebase 
     $('.all_content').css('display', 'block');
 
     // Set profile button image.
-    $('#profilebutton').attr('src', firebase.auth().currentUser.photoURL);
+    //$('#profilebutton').attr('src', firebase.auth().currentUser.photoURL);
 
     // Link up buttons to modal.
     $('#addbutton').on('click', () => {
-        modalView.openModal($('#addModal'), $('#veil'), '30px');
-    })
-
-    $('#closeaddmenu').on('click', () => {
+        modalView.openModal($('#addModal'), $('#veil'), '70%');
+    });
+    
+    $('#veil').on('click', () => {
         modalView.closeModal($('#addModal'), $('#veil'));
-    })
+    });
+
+    /*$('#closeaddmenu').on('click', () => {
+        modalView.closeModal($('#addModal'), $('#veil'));
+    })*/
+
+    $('#add_actor').on('click', () => {
+        window.location.href="/add_actor.m.html";
+    });
+
+    $('#add_interaction').on('click', () => {
+        window.location.href="/add_interaction.m.html";
+    });
 
     initialiseMap();
 }
 
 // -------------- Check user ---------------
 
-firebase.auth().onAuthStateChanged((user) => {
+/*firebase.auth().onAuthStateChanged((user) => {
     if(user) { // User logged in
         var firebaseDB = firebase.database();
 
@@ -46,4 +58,6 @@ firebase.auth().onAuthStateChanged((user) => {
     } else { // User not logged in
         window.location.replace('/');
     }
-});
+});*/
+
+$(initialise);

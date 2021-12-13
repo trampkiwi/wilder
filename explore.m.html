@@ -66,8 +66,6 @@
 
             #paulbutton {
                 margin-right: 15px;
-
-
             }
 
             #pauldialogue {
@@ -134,6 +132,27 @@
                 width: 100%;
                 z-index: 0;
             }
+
+            .navBar .content {
+                display: flex;
+                flex-direction: row;
+                margin: 0;
+            }
+
+            .navBar .content div {
+                -ms-flex: 1;
+                flex: 1;
+                text-align: center;
+                border-right: 5px dotted var(--hr-and-line-col);
+            }
+
+            .navBar .content div img {
+                height: 6rem;
+            }
+
+            .add_text {
+                font-size: 1.2rem;
+            }
         </style>
 
         <!-- Google Firebase config -->
@@ -172,12 +191,17 @@
 
         <div class="veil" id="veil"></div>
         <div class="navBar" id="addModal">
-            <a href="#" class="closeNavbar" id="closeaddmenu">X</a>
-            <div class="header">
-                <h1>Add</h1>
-            </div>
+            <!--<a href="#" class="closeNavbar" id="closeaddmenu">X</a>-->
+            
             <div class="content">
-                <a href="#" class="navlink">Go back to front page</a><br>
+                <div id="add_actor">
+                    <img src="/Assets/add_actor.png"><br>
+                    <span class="add_text">Add actor</span>
+                </div>
+                <div id="add_interaction" style="border: none;">
+                    <img src="/Assets/add_interaction.png"><br>
+                    <span class="add_text">Add interaction</span>
+                </div>
             </div>
         </div>
     </body>
